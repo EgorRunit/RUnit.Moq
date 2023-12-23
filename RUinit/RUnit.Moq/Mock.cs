@@ -1,3 +1,4 @@
+using System;
 using System.Linq.Expressions;
 using RUnIt.Moq.Builders;
 
@@ -18,11 +19,6 @@ namespace RUnIt.Moq
             if (createdType != null)
             {
                 Object = createdType;
-                _proxyMock = Object as ProxyMock<T>;
-                if (_proxyMock != null)
-                {
-                    _proxyMock.Parent = this;
-                }
             }
             else
             {
@@ -32,6 +28,18 @@ namespace RUnIt.Moq
 
         public Setup Setup(Expression<Action<T>> expression)
         {
+            //var sss = new System.Linq.Expressions.Expression.MethodCallExpressionProxy(new System.Linq.Expressions.Expression.LambdaExpressionProxy(expression).Body).Arguments
+            var me = expression as MethodCallExpression;
+            var methodCallExp = (MethodCallExpression)expression.Body;
+            var arguments = methodCallExp.Arguments;
+            var sgfdf = arguments[1].ToString();
+            //var ddd = ((RuntimeMethodInfo)(new System.Linq.Expressions.Expression.MethodCallExpressionProxy(arguments[1]).Method)).Name;
+
+            if (me != null)
+            {
+                var ff = me.Arguments;
+            }
+            //var dd = expression.Body
             var type = Object.GetType();
 
             

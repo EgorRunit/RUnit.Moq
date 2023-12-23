@@ -10,7 +10,7 @@ namespace RUinit.Moq.Consoles
         {
             var moq = new Mock<ITestInterface>();
             var s = "Dddddddddd";
-            moq.Setup(x => x.Write("rrrrrrrrrrr", 44, new StringBuilder()))
+            moq.Setup(x => x.Write("rrrrrrrrrrr", It.Any<int>(), new StringBuilder()))
                 .Execute(() =>
                 {
                     Console.WriteLine(s);
