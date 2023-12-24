@@ -7,6 +7,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "RUnIt.Moq.Console", "RUinit
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RUnIt.Moq", "RUnit.Moq\RUnIt.Moq.csproj", "{080DC41E-69E3-49D1-BF5C-26B17BABDEF2}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RUnit.Test", "RUnit.Test\RUnit.Test.csproj", "{33C68C7E-035A-47B0-862E-BA9A3F0FE14B}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -21,6 +23,10 @@ Global
 		{080DC41E-69E3-49D1-BF5C-26B17BABDEF2}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{080DC41E-69E3-49D1-BF5C-26B17BABDEF2}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{080DC41E-69E3-49D1-BF5C-26B17BABDEF2}.Release|Any CPU.Build.0 = Release|Any CPU
+		{33C68C7E-035A-47B0-862E-BA9A3F0FE14B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{33C68C7E-035A-47B0-862E-BA9A3F0FE14B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{33C68C7E-035A-47B0-862E-BA9A3F0FE14B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{33C68C7E-035A-47B0-862E-BA9A3F0FE14B}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

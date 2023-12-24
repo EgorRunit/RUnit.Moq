@@ -10,12 +10,17 @@ namespace RUinit.Moq.Consoles
         {
             var moq = new Mock<ITestInterface>();
             var s = "Dddddddddd";
-            moq.Setup(x => x.Write("rrrrrrrrrrr", It.Any<int>(), new StringBuilder()))
-                .Execute(() =>
+            moq.Setup(x => x.Write("rrrrrrrrrrr", It.Any<int>(), new StringBuilder("rrrrr")))
+                .Callback(() =>
                 {
                     Console.WriteLine(s);
                 });
-            moq.Object.Write("arg1", 45, new StringBuilder("eeeeeee"));
+            moq.Setup(z => z.Write("Ssss", It.Any<int>(), new StringBuilder()))
+                .Callback(() =>
+                {
+                    Console.WriteLine("2222222");
+                });
+            moq.Object.Write("arg1", 45, new StringBuilder("rrrrr"));
             Console.ReadKey();
             return;
         }
