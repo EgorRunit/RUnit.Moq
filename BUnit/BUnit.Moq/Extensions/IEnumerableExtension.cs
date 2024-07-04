@@ -1,7 +1,6 @@
-using System;
 using System.Collections.Generic;
 using System.Linq.Expressions;
-using System.Text;
+using System.Reflection;
 
 namespace System.Linq
 {
@@ -10,7 +9,7 @@ namespace System.Linq
         public static List<SetupArgument> ToSetupParameterList(this IEnumerable<Expression> array)
         {
             var parameters = new List<SetupArgument>();
-            foreach(var arrayItem in array) 
+            foreach (var arrayItem in array)
             {
                 var parameter = new SetupArgument()
                 {
@@ -26,10 +25,18 @@ namespace System.Linq
                         parameter.Value = constantExpression.Value;
                         break;
                     case ExpressionType.MemberAccess:
-                        var fieldExpression = arrayItem as MemberExpression;
-                        constantExpression = fieldExpression.Expression as ConstantExpression;
+                        var memberExpression = arrayItem as MemberExpression;
+                        constantExpression = memberExpression.Expression as ConstantExpression;
                         parameter.SetupArgumentType = SetupArgumentType.MemberAccess;
-                        parameter.Value = constantExpression.Value;
+                        if (parameter.Type.IsValueType)
+                        {
+                            parameter.MemberExpression= memberExpression;
+                        }
+                        else
+                        {
+                            parameter.MemberExpression = memberExpression;
+                            //parameter.Value = constantExpression.Value;
+                        }
                         break;
                     default:
                         parameter.SetupArgumentType = SetupArgumentType.Ref;

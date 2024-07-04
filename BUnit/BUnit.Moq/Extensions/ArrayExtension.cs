@@ -15,8 +15,37 @@ namespace System.Collections.Generic
 
     public class SetupArgument
     {
+        object _value;
+        public MemberExpression MemberExpression { get; set; }
+
         public SetupArgumentType SetupArgumentType { get; set; }
-        public object Value { get; set; }
+
+        public object Value
+        {
+            get
+            {
+                if (MemberExpression != null)
+                {
+                    if (Type.IsValueType)
+                    {
+                        object container = ((ConstantExpression)MemberExpression.Expression).Value;
+                        object value = ((FieldInfo)MemberExpression.Member).GetValue(container);
+                        return value;
+                    }
+                    else
+                    {
+                        object container = ((ConstantExpression)MemberExpression.Expression).Value;
+                        object value = ((FieldInfo)MemberExpression.Member).GetValue(container);
+                        return value;
+                    }
+                }
+                return _value;
+            }
+            set
+            {
+                _value = value;
+            }
+        }
         public Type Type { get; set; }
     }
 
