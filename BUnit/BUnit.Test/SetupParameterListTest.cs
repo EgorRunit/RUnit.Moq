@@ -96,5 +96,40 @@ namespace BUnit.Test
             Assert.True(sb.Equals(setupParametrList[0].Value));
         }
 
+
+        [Fact]
+        public void WriteEnumTypeConstant()
+        {
+            //arrange
+            var expressionHelper = new ExpressionHelper<SetupExpressionHelper>();
+            var expression = expressionHelper.Setup(x => x.Write(SetupExpressionHelperEmum.Four));
+
+            //act
+            var setupParametrList = expression.Arguments.ToSetupParameterList();
+
+            //asser
+            Assert.True(setupParametrList.Count == 1);
+            Assert.True(setupParametrList[0].Type == typeof(SetupExpressionHelperEmum));
+            Assert.True(setupParametrList[0].SetupArgumentType == SetupArgumentType.Constant);
+            Assert.True((SetupExpressionHelperEmum)setupParametrList[0].Value == SetupExpressionHelperEmum.Four);
+        }
+
+        [Fact]
+        public void WriteEnumTypeMember()
+        {
+            //arrange
+            var enumValue = SetupExpressionHelperEmum.Three;
+            var expressionHelper = new ExpressionHelper<SetupExpressionHelper>();
+            var expression = expressionHelper.Setup(x => x.Write(enumValue));
+
+            //act
+            var setupParametrList = expression.Arguments.ToSetupParameterList();
+
+            //asser
+            Assert.True(setupParametrList.Count == 1);
+            Assert.True(setupParametrList[0].Type == typeof(SetupExpressionHelperEmum));
+            Assert.True(setupParametrList[0].SetupArgumentType == SetupArgumentType.MemberAccess);
+            Assert.True((SetupExpressionHelperEmum)setupParametrList[0].Value == SetupExpressionHelperEmum.Three);
+        }
     }
 }

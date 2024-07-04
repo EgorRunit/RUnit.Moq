@@ -6,6 +6,14 @@ using System.Threading.Tasks;
 
 namespace BUnit.Test.ClassHelpers
 {
+    internal enum SetupExpressionHelperEmum
+    {
+        One,
+        Two,
+        Three,
+        Four,
+    }
+
     internal class SetupExpressionHelper
     {
         public void Write(int x)
@@ -18,5 +26,11 @@ namespace BUnit.Test.ClassHelpers
         {
 
         }
+
+        public void Write(SetupExpressionHelperEmum s)
+        {
+
+        }
+
     }
 }
