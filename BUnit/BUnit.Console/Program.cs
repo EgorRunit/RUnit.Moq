@@ -11,7 +11,6 @@ namespace BUnit.Consoles
     {
         static void Main(string[] args)
         {
-
             var _ittMock = new Mock<ITT>();
             var sb = new StringBuilder("eeeeeee");
             _ittMock.Setup(x => x.Write("d", sb)).Callback<string, StringBuilder>((x1, x2) =>
