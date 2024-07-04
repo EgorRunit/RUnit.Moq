@@ -8,9 +8,9 @@ namespace RUinit.Moq.Consoles
 {
     public interface ITestInterface
     {
-        //void Write();
+        void Write();
         void Write(string text, int i, StringBuilder sb);
-        //int WriteInt(int ddd);
+        int WriteInt(int ddd);
     }
 
     public class TestInterface : ITestInterface

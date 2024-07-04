@@ -5,9 +5,9 @@ VisualStudioVersion = 17.4.33103.184
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "RUnIt.Moq.Console", "RUinit.Moq.Console\RUnIt.Moq.Console.csproj", "{95744F6A-8F49-4E45-A372-E3F1A4E96131}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RUnIt.Moq", "RUnit.Moq\RUnIt.Moq.csproj", "{080DC41E-69E3-49D1-BF5C-26B17BABDEF2}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "RUnIt.Moq", "RUnit.Moq\RUnIt.Moq.csproj", "{080DC41E-69E3-49D1-BF5C-26B17BABDEF2}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RUnit.Test", "RUnit.Test\RUnit.Test.csproj", "{33C68C7E-035A-47B0-862E-BA9A3F0FE14B}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "RUnit.Test", "RUnit.Test\RUnit.Test.csproj", "{33C68C7E-035A-47B0-862E-BA9A3F0FE14B}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
