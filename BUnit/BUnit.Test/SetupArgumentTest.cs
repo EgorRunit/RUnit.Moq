@@ -14,7 +14,7 @@ namespace BUnit.Test
             //arrange
             Expression<Action<int>> expressionAction = t => Write(5);
             var setupArgument = new SetupArgument(expressionAction.GetExpression(0));
-
+                
             //setupArgument
             Assert.True(setupArgument.Type == typeof(int));
             Assert.True(setupArgument.SetupArgumentType == SetupArgumentType.Constant);

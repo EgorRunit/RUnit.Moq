@@ -5,7 +5,7 @@ using System.Reflection;
 
 namespace System.Linq
 {
-    public static class IEnumerableExtension
+    public static class EnumerableExtension
     {
         public static List<SetupArgument> ToSetupParameterList(this IEnumerable<Expression> array)
         {
