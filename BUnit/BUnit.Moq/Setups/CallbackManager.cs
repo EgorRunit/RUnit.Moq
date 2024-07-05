@@ -7,8 +7,8 @@ namespace BUnit.Moq.Setups
 {
     public class CallbackManager
     {
-        readonly MockSetupSettings _mockSetupSettings;
-        public CallbackManager(MockSetupSettings mockSetupSettings)
+        readonly SetupSettings _mockSetupSettings;
+        internal CallbackManager(SetupSettings mockSetupSettings)
         {
             _mockSetupSettings = mockSetupSettings;
         }

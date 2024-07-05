@@ -1,19 +1,20 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Linq.Expressions;
+using System.Reflection;
 
 namespace BUnit.Moq.Setups
 {
-    public class MockSetupSettings
+    internal class SetupSettings
     {
         Dictionary<string, List<SetupSetting>> _mockSetupSettings;
 
-        public MockSetupSettings()
+        internal SetupSettings()
         {
             _mockSetupSettings = new Dictionary<string, List<SetupSetting>>();
         }
 
-        public SetupSetting RegisterSetup(LambdaExpression lambdaExpression, ActionSetupBase actionSetupBase)
+        internal SetupSetting RegisterSetup(LambdaExpression lambdaExpression, ActionSetupBase actionSetupBase)
         {
             var setupSetting = new SetupSetting(lambdaExpression);
             if(!_mockSetupSettings.ContainsKey(setupSetting.MethodOriginalSignature))
@@ -32,6 +33,12 @@ namespace BUnit.Moq.Setups
                 list.Add(setupSetting);
             }
             return setupSetting;
+        }
+
+        internal SetupSetting TryGetSetupSetting(SetupSetting setupSetting)
+        {
+            return null;
+                
         }
     }
 }

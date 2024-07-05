@@ -11,7 +11,7 @@ namespace BUnit.Moq
     /// <typeparam name="T">Тустируемый тип</typeparam>
     public class Mock<T> where T : class
     {
-        MockSetupSettings _mockSetupSettings;
+        SetupSettings _mockSetupSettings;
         /// <summary>
         /// Экземпляр двойника тестируемого типа
         /// </summary>
@@ -34,7 +34,7 @@ namespace BUnit.Moq
         /// </summary>
         public Mock()
         {
-            _mockSetupSettings= new MockSetupSettings();
+            _mockSetupSettings= new SetupSettings();
             _proxyMock = TypeFactory.CreateProxy<T>();
             _proxyMock.RegisterCallbackManager(new CallbackManager(_mockSetupSettings));
         }

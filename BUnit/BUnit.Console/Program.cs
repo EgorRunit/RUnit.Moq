@@ -54,7 +54,6 @@ namespace BUnit.Consoles
             //v.Go();
             //v = c;
             //v.Go();
-            return;
             var _ittMock = new Mock<ITT>();
             var sb = new StringBuilder("eeeeeee");
             _ittMock.Setup(x => x.Write("d", sb)).Callback<string, StringBuilder>((x1, x2) =>
