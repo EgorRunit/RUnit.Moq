@@ -14,7 +14,7 @@ namespace BUnit.Test.Extensions
 
 
         [Fact]
-        public void Test()
+        public void IntConstant_StringConstant_ByteConstant()
         {
             //arrange
             Expression<Action> expressionAction = () => Write(5, "4444", (byte)3);
@@ -30,6 +30,77 @@ namespace BUnit.Test.Extensions
             Assert.True(expresions[0].Type == typeof(int));
             Assert.True(expresions[1].Type == typeof( string));
             Assert.True(expresions[2].Type == typeof(byte));
+            Assert.True(Convert.ToInt32(expresions[0].Value) == 5);
+            Assert.True(Convert.ToString(expresions[1].Value) == "4444");
+            Assert.True(Convert.ToByte(expresions[2].Value) == 3);
+        }
+
+
+        [Fact]
+        public void IntConstan_StringBuilderAnyValue_ByteConstant()
+        {
+            //arrange
+            Expression<Action> expressionAction = () => Write(5, new StringBuilder(), (byte)3);
+
+            //act
+            var expresions = expressionAction.GetExpressions();
+
+            //assert
+            Assert.True(expresions.Count == 3);
+            Assert.True(expresions[0].SetupArgumentType == SetupArgumentType.Constant);
+            Assert.True(expresions[1].SetupArgumentType == SetupArgumentType.AnyValue);
+            Assert.True(expresions[2].SetupArgumentType == SetupArgumentType.Constant);
+            Assert.True(expresions[0].Type == typeof(int));
+            Assert.True(expresions[1].Type == typeof(StringBuilder));
+            Assert.True(expresions[2].Type == typeof(byte));
+            Assert.True(Convert.ToInt32(expresions[0].Value) == 5);
+            Assert.True(Convert.ToByte(expresions[2].Value) == 3);
+        }
+
+        [Fact]
+        public void IntMember_StringBuilderAnyValue_ByteConstant()
+        {
+            //arrange
+            var intValue = 10;
+            Expression<Action> expressionAction = () => Write(intValue, new StringBuilder(), (byte)3);
+
+            //act
+            var expresions = expressionAction.GetExpressions();
+
+            //assert
+            Assert.True(expresions.Count == 3);
+            Assert.True(expresions[0].SetupArgumentType == SetupArgumentType.MemberAccess);
+            Assert.True(expresions[1].SetupArgumentType == SetupArgumentType.AnyValue);
+            Assert.True(expresions[2].SetupArgumentType == SetupArgumentType.Constant);
+            Assert.True(expresions[0].Type == typeof(int));
+            Assert.True(expresions[1].Type == typeof(StringBuilder));
+            Assert.True(expresions[2].Type == typeof(byte));
+            Assert.True(Convert.ToInt32(expresions[0].Value) == intValue);
+            Assert.True(Convert.ToByte(expresions[2].Value) == 3);
+        }
+
+        [Fact]
+        public void IntMember_StringBuilderMember_ByteConstant()
+        {
+            //arrange
+            var intValue = 10;
+            var stringBuilderValue = new StringBuilder();
+            Expression<Action> expressionAction = () => Write(intValue, stringBuilderValue, (byte)3);
+
+            //act
+            var expresions = expressionAction.GetExpressions();
+
+            //assert
+            Assert.True(expresions.Count == 3);
+            Assert.True(expresions[0].SetupArgumentType == SetupArgumentType.MemberAccess);
+            Assert.True(expresions[1].SetupArgumentType == SetupArgumentType.MemberAccess);
+            Assert.True(expresions[2].SetupArgumentType == SetupArgumentType.Constant);
+            Assert.True(expresions[0].Type == typeof(int));
+            Assert.True(expresions[1].Type == typeof(StringBuilder));
+            Assert.True(expresions[2].Type == typeof(byte));
+            Assert.True(Convert.ToInt32(expresions[0].Value) == intValue);
+            Assert.True(ReferenceEquals(expresions[1].Value, stringBuilderValue));
+            Assert.True(Convert.ToByte(expresions[2].Value) == 3);
         }
     }
 }

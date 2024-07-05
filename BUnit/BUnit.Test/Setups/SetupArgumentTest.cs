@@ -2,11 +2,11 @@ using BUnit.Moq.Setups;
 using System.Linq.Expressions;
 using System.Text;
 
-namespace BUnit.Test
+namespace BUnit.Test.Setups
 {
     public class SetupArgumentTest
     {
-        void Write<T>(T a){}
+        void Write<T>(T a) { }
 
         [Fact]
         public void Expression_With_ValueType_Constant()
@@ -14,7 +14,7 @@ namespace BUnit.Test
             //arrange
             Expression<Action<int>> expressionAction = t => Write(5);
             var setupArgument = new SetupArgument(expressionAction.GetExpression(0));
-                
+
             //setupArgument
             Assert.True(setupArgument.Type == typeof(int));
             Assert.True(setupArgument.SetupArgumentType == SetupArgumentType.Constant);
