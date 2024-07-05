@@ -12,7 +12,7 @@ namespace BUnit.Test.Extensions
             return methodCallExpression.Arguments.ToSetupParameterList();
         }
 
-        public static Expression GetExpression<T>(this Expression<Action<T>> expression, int argumentIndex)
+        public static Expression GetExpression(this Expression<Action> expression, int argumentIndex)
         {
             var lamdaExpression = expression as LambdaExpression;
             var methodCallExpression = lamdaExpression.Body as MethodCallExpression;

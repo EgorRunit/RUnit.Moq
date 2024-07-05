@@ -12,10 +12,10 @@ namespace BUnit.Test.Setups
         public void Expression_With_ValueType_Constant()
         {
             //arrange
-            Expression<Action<int>> expressionAction = t => Write(5);
+            Expression<Action> expressionAction = () => Write(5);
             var setupArgument = new SetupArgument(expressionAction.GetExpression(0));
 
-            //setupArgument
+            //assert
             Assert.True(setupArgument.Type == typeof(int));
             Assert.True(setupArgument.SetupArgumentType == SetupArgumentType.Constant);
             Assert.True(Convert.ToInt32(setupArgument.Value) == 5);
@@ -26,13 +26,13 @@ namespace BUnit.Test.Setups
         {
             //arrange
             var cn = 5;
-            Expression<Action<int>> expressionAction = t => Write(cn);
+            Expression<Action> expressionAction = () => Write(cn);
             var setupArgument = new SetupArgument(expressionAction.GetExpression(0));
 
             //act
             cn = 6;
 
-            //asser
+            //assert
             Assert.True(setupArgument.Type == typeof(int));
             Assert.True(setupArgument.SetupArgumentType == SetupArgumentType.MemberAccess);
             Assert.True(Convert.ToInt32(setupArgument.Value) == cn);
@@ -42,10 +42,10 @@ namespace BUnit.Test.Setups
         public void Expression_With_ReferenceType_New()
         {
             //arrange
-            Expression<Action<StringBuilder>> expressionAction = t => Write(new StringBuilder());
+            Expression<Action> expressionAction = () => Write(new StringBuilder());
             var setupArgument = new SetupArgument(expressionAction.GetExpression(0));
 
-            //asser
+            //assert
             Assert.True(setupArgument.Type == typeof(StringBuilder));
             Assert.True(setupArgument.SetupArgumentType == SetupArgumentType.AnyValue);
         }
@@ -55,7 +55,7 @@ namespace BUnit.Test.Setups
         {
             //arrange
             var sb = new StringBuilder();
-            Expression<Action<StringBuilder>> expressionAction = t => Write(sb);
+            Expression<Action> expressionAction = () => Write(sb);
             var setupArgument = new SetupArgument(expressionAction.GetExpression(0));
 
             //assert
@@ -68,7 +68,7 @@ namespace BUnit.Test.Setups
         public void Expression_With_Enum_Constant()
         {
             //arrange
-            Expression<Action<DayOfWeek>> expressionAction = t => Write(DayOfWeek.Friday);
+            Expression<Action> expressionAction = () => Write(DayOfWeek.Friday);
             var setupArgument = new SetupArgument(expressionAction.GetExpression(0));
 
             //assert
@@ -82,10 +82,10 @@ namespace BUnit.Test.Setups
         {
             //arrange
             var enumValue = DayOfWeek.Friday;
-            Expression<Action<DayOfWeek>> expressionAction = t => Write(enumValue);
+            Expression<Action> expressionAction = () => Write(enumValue);
             var setupArgument = new SetupArgument(expressionAction.GetExpression(0));
 
-            //asser
+            //assert
             Assert.True(setupArgument.Type == typeof(DayOfWeek));
             Assert.True(setupArgument.SetupArgumentType == SetupArgumentType.MemberAccess);
             Assert.True((DayOfWeek)setupArgument.Value == DayOfWeek.Friday);
