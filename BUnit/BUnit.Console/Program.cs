@@ -7,10 +7,54 @@ using System.Text;
 
 namespace BUnit.Consoles
 {
-    internal class Program
+    internal interface IT
+    {
+        void G();
+    }
+    internal class Z
+    {
+        public void G()
+        {
+
+        }
+    }
+
+    internal class Vehicle
+    {
+        public void Go() => Console.WriteLine("Vehicle");
+    }
+    internal class Car:Vehicle
+    {
+        public new void Go() => Console.WriteLine("Car");
+    }
+
+    internal class Program: Z, IT
     {
         static void Main(string[] args)
         {
+            //замещение
+            //string[] colors = { "green", "brown", "blue", "red" };
+            //var query1 = colors.Where(x => x.Contains("e"));
+            //query1 = colors.Where(x => x.Contains("n"));
+            //Console.WriteLine(query1.Count());
+
+            //var ch = "e";
+            //var query2 = colors.Where(x => x.Contains(ch));
+            //ch = "n";
+            //query2 = colors.Where(x => x.Contains(ch));
+            //Console.WriteLine(query2.Count());
+            //где упаковка
+            //int ee = 5;
+            //ee.ToString();
+            //ee.GetType();
+            //Console.WriteLine("{0} {1}", 1 % 3, 8 % 3);
+            //Car c = new Car();
+            //c.Go();
+            //Vehicle v = new Vehicle();
+            //v.Go();
+            //v = c;
+            //v.Go();
+            return;
             var _ittMock = new Mock<ITT>();
             var sb = new StringBuilder("eeeeeee");
             _ittMock.Setup(x => x.Write("d", sb)).Callback<string, StringBuilder>((x1, x2) =>

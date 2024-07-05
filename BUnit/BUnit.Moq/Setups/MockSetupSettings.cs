@@ -6,19 +6,19 @@ namespace BUnit.Moq.Setups
 {
     public class MockSetupSettings
     {
-        Dictionary<string, List<MockSetupSetting>> _mockSetupSettings;
+        Dictionary<string, List<SetupSetting>> _mockSetupSettings;
 
         public MockSetupSettings()
         {
-            _mockSetupSettings = new Dictionary<string, List<MockSetupSetting>>();
+            _mockSetupSettings = new Dictionary<string, List<SetupSetting>>();
         }
 
-        public MockSetupSetting RegisterSetup(LambdaExpression lambdaExpression, ActionSetupBase actionSetupBase)
+        public SetupSetting RegisterSetup(LambdaExpression lambdaExpression, ActionSetupBase actionSetupBase)
         {
-            var setupSetting = new MockSetupSetting(lambdaExpression);
+            var setupSetting = new SetupSetting(lambdaExpression);
             if(!_mockSetupSettings.ContainsKey(setupSetting.MethodOriginalSignature))
             {
-                _mockSetupSettings.Add(setupSetting.MethodOriginalSignature, new List<MockSetupSetting>());
+                _mockSetupSettings.Add(setupSetting.MethodOriginalSignature, new List<SetupSetting>());
                 _mockSetupSettings[setupSetting.MethodOriginalSignature].Add(setupSetting);
             }
             else

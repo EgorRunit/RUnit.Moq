@@ -25,7 +25,8 @@ namespace BUnit.Moq.Setups
         /// </example>
         MemberAccess,
         /// <summary>
-        /// Аргумент создается прямо в expression.
+        /// Аргумент создается прямо в expression или используется
+        /// универсальная констркцмя It.Any<>().
         /// </summary>
         /// <example>
         /// x.Write(new StringBuilder());

@@ -8,16 +8,15 @@ namespace BUnit.Moq.Setups
     /// <summary>
     /// Класс для обработки метода Mock.Setup().
     /// </summary>
-    public class MockSetupSetting : IEquatable<MockSetupSetting>
+    public class SetupSetting : IEquatable<SetupSetting>
     {
-        protected List<SetupArgument> _setupParameters;
+        readonly List<SetupArgument> _setupParameters;
 
         /// <summary>
         /// Количество в лямда выражения аргументов с любым значением.
         /// Чем их большеб тем меньшк ранг настройки выражения для Mock.Setup.
         /// </summary>
         readonly internal int AnyCount;
-
         /// <summary>
         /// Согнатура метода при динамическом вызове.
         /// </summary>
@@ -25,13 +24,13 @@ namespace BUnit.Moq.Setups
         /// <summary>
         /// Системная сигнатура метода
         /// </summary>
-        readonly public string MethodOriginalSignature;
+        readonly internal string MethodOriginalSignature;
 
         /// <summary>
         /// Конструктор.
         /// </summary>
         /// <param name="lambdaExpression">Экземпляр лямда выражения для Mock.Setup.</param>
-        public MockSetupSetting(LambdaExpression lambdaExpression)
+        public SetupSetting(LambdaExpression lambdaExpression)
         {
             var methodCallExpression = lambdaExpression.Body as MethodCallExpression;
 
@@ -45,19 +44,19 @@ namespace BUnit.Moq.Setups
             AnyCount = _setupParameters.Where(x => x.SetupArgumentType == SetupArgumentType.AnyValue).Count();
         }
 
-        public static bool operator == (MockSetupSetting mss1, MockSetupSetting mss2)
+        public static bool operator == (SetupSetting mss1, SetupSetting mss2)
         {
             return Enumerable.SequenceEqual<SetupArgument>(mss1._setupParameters, mss2._setupParameters);
         }
 
-        public static bool operator != (MockSetupSetting mss1, MockSetupSetting mss2)
+        public static bool operator != (SetupSetting mss1, SetupSetting mss2)
         {
             return !Enumerable.SequenceEqual<SetupArgument>(mss1._setupParameters, mss2._setupParameters);
         }
 
         public override bool Equals(object obj)
         {
-            return Equals(obj as MockSetupSetting);
+            return Equals(obj as SetupSetting);
         }
 
         public override int GetHashCode()
@@ -65,7 +64,7 @@ namespace BUnit.Moq.Setups
             return this.MethodCallSignature.GetHashCode();
         }
 
-        public bool Equals(MockSetupSetting other)
+        public bool Equals(SetupSetting other)
         {
             return ReferenceEquals(other, this);
         }

@@ -17,4 +17,4 @@ using System.Runtime.InteropServices;
 // будет видимым для COM.
 
 [assembly: Guid("9aecbcac-fee6-40fe-bc1d-197cdd0443b8")]
-//[assembly: InternalsVisibleTo("BUnit.Test")]
+[assembly: InternalsVisibleTo("BUnit.Test")]
