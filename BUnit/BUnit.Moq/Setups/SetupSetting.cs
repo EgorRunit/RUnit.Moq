@@ -7,7 +7,7 @@ namespace BUnit.Moq.Setups
     /// <summary>
     /// Класс для обработки метода Mock.Setup().
     /// </summary>
-    public class SetupSetting
+    public abstract class SetupSetting
     {
         readonly List<SetupArgument> _setupParameters;
 
@@ -34,11 +34,39 @@ namespace BUnit.Moq.Setups
             AnyCount = _setupParameters.Where(x => x.SetupArgumentType == SetupArgumentType.AnyValue).Count();
         }
 
+        protected object[] buildDynamicCallback()
+        {
+            //var paramameters = new object[methodCallExpression.Arguments.Count];
+            //for (var i = 0; i < methodCallExpression.Arguments.Count; i++)
+            //{
+            //    var arg = methodCallExpression.Arguments[i];
+            //    switch (arg.NodeType)
+            //    {
+            //        case ExpressionType.Constant:
+            //            var constantArg = (ConstantExpression)arg;
+            //            paramameters[i] = constantArg.Value;
+            //            break;
+            //    }
+            //}
+            //return paramameters;
+            return null;
+        }
+
+        /// <summary>
+        /// Проверяет на эквивалентость параметров выражение в другой настроке.
+        /// </summary>
+        /// <param name="setupSetting">Экземпляр настроки Mocq.Setup.</param>
+        /// <returns>true - если параметры совпадают, false в противном случае.</returns>
         public bool EqualsSetupParamaters(SetupSetting setupSetting)
         {
             return _setupParameters.SequenceEqual(setupSetting._setupParameters);
         }
 
+        /// <summary>
+        /// Проверяет, подходяд ли аргументы вызова функции к параметра настройки Mock.Setup.
+        /// </summary>
+        /// <param name="objects">Список аргументов вызываемой функции</param>
+        /// <returns>true - если параметры совпадают, false в противном случае.</returns>
         public bool EqualsSetupParametersToObjectList(List<object> objects)
         {
             return _setupParameters.SequenceEqual(objects);

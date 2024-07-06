@@ -19,40 +19,42 @@ namespace System.Linq
 
         public static bool SequenceEqual(this List<SetupArgument> setupParameters, List<object> objects)
         {
-            for(var i=0; i<setupParameters.Count;i++)
+            for (var i = 0; i < setupParameters.Count; i++)
             {
                 var setupParameter = setupParameters[i];
                 var callArgument = objects[i];
-                if(setupParameter.Type != callArgument.GetType())
+                if (setupParameter.Type != callArgument.GetType())
                 {
                     return false;
                 }
-                if(setupParameter.SetupArgumentType == SetupArgumentType.AnyValue)
+                if (setupParameter.SetupArgumentType == SetupArgumentType.AnyValue)
                 {
                     continue;
                 }
-                if(setupParameter.SetupArgumentType == SetupArgumentType.Constant)
+                if (setupParameter.SetupArgumentType == SetupArgumentType.Constant)
                 {
-                    if(setupParameter.Type == typeof(string))
+                    if (setupParameter.Type == typeof(string))
                     {
-                        if(setupParameter.Value.ToString() != callArgument.ToString())
+                        if (setupParameter.Value.ToString() != callArgument.ToString())
                         {
                             return false;
                         }
-                    } else if(!((ValueType)setupParameter.Value).Equals(callArgument))
+                    }
+                    else if (!((ValueType)setupParameter.Value).Equals(callArgument))
                     {
                         return false;
                     }
                 }
                 if (setupParameter.SetupArgumentType == SetupArgumentType.MemberAccess)
                 {
-                    if(setupParameter.Type.IsValueType)
+                    if (setupParameter.Type.IsValueType)
                     {
-                        if(!((ValueType)setupParameter.Value).Equals(callArgument))
+                        if (!((ValueType)setupParameter.Value).Equals(callArgument))
                         {
                             return false;
                         }
-                    } else if(!ReferenceEquals(setupParameter.Value, callArgument))
+                    }
+                    else if (!ReferenceEquals(setupParameter.Value, callArgument))
                     {
                         return false;
                     }

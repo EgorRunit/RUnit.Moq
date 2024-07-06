@@ -32,8 +32,17 @@ namespace BUnit.Moq.Setups
         /// <returns></returns>
         internal SetupSetting RegisterSetup(LambdaExpression lambdaExpression, ActionSetupBase actionSetupBase)
         {
-            var setupSetting = new SetupSetting(lambdaExpression);
-            if(!_mockSetupSettings.ContainsKey(setupSetting.MethodOriginalSignature))
+            SetupSetting setupSetting;
+            if(lambdaExpression.ReturnType ==typeof(void))
+            {
+                setupSetting = new SetupSettingAction(lambdaExpression);
+            }
+            else
+            {
+                setupSetting = new SetupSettingFunction(lambdaExpression);
+            }
+
+            if (!_mockSetupSettings.ContainsKey(setupSetting.MethodOriginalSignature))
             {
                 _mockSetupSettings.Add(setupSetting.MethodOriginalSignature, new List<SetupSetting>());
                 _mockSetupSettings[setupSetting.MethodOriginalSignature].Add(setupSetting);

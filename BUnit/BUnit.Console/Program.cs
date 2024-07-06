@@ -41,9 +41,6 @@ namespace BUnit.Consoles
         static void Main(string[] args)
         {
 
-            object d = null;
-            NotNull(null);
-            return;
             //замещение
             //string[] colors = { "green", "brown", "blue", "red" };
             //var query1 = colors.Where(x => x.Contains("e"));
@@ -67,31 +64,32 @@ namespace BUnit.Consoles
             //v = c;
             //v.Go();
             var _ittMock = new Mock<ITT>();
-            var sb = new StringBuilder("eeeeeee");
-            _ittMock.Setup(x => x.Write("d", sb)).Callback<string, StringBuilder>((x1, x2) =>
-            {
+            _ittMock.Verify(x => x.Write(It.Any<int>()));
+            //var sb = new StringBuilder("eeeeeee");
+            //_ittMock.Setup(x => x.Write("d", sb)).Callback<string, StringBuilder>((x1, x2) =>
+            //{
 
-                Console.WriteLine("Перегрузка2");
-                Console.WriteLine(x1);
-                Console.WriteLine(x2);
-            });
+            //    Console.WriteLine("Перегрузка2");
+            //    Console.WriteLine(x1);
+            //    Console.WriteLine(x2);
+            //});
             //_ittMock.Setup(x => x.Write("d", It.Any<StringBuilder>())).Callback<string,StringBuilder>((x1,x2)=>
             //{
-               
+
             //    Console.WriteLine("Перегрузка2");
             //    Console.WriteLine(x1);
             //    Console.WriteLine(x2);
             //});
 
-            
-
-            var sss = _ittMock.Object;
-            //sss.Write(4);
-            //sss.Write("Ddd");
-            sss.Write("1111", new StringBuilder("ffff111111111111111"));
 
 
-            
+            //var sss = _ittMock.Object;
+            ////sss.Write(4);
+            ////sss.Write("Ddd");
+            //sss.Write("1111", new StringBuilder("ffff111111111111111"));
+
+
+
 
             //var assemblyName = new AssemblyName("DynamicAssemblyUnitTest");
             //_assemblyBuilder = AssemblyBuilder.DefineDynamicAssembly(assemblyName, AssemblyBuilderAccess.Run);

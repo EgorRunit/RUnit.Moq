@@ -3,8 +3,9 @@ using System.Linq.Expressions;
 
 namespace BUnit.Moq.Setups
 {
-    public class ActionSetup<T> : ActionSetupBase
+    internal class ActionSetup<T> : ActionSetupBase
     {
+
         Expression<Action<T>> _expression;
         protected CallbackManager callbackManager;
 

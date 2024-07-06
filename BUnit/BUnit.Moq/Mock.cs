@@ -9,7 +9,7 @@ namespace BUnit.Moq
     /// Класс настройки поведения тестируемого типа
     /// </summary>
     /// <typeparam name="T">Тустируемый тип</typeparam>
-    public class Mock<T> where T : class
+    public partial class Mock<T> where T : class
     {
         SetupSettings _mockSetupSettings;
         /// <summary>
@@ -40,11 +40,11 @@ namespace BUnit.Moq
         }
 
 
-        public ActionSetup<T> Setup(Expression<Action<T>> expression)
+        public SetupSetting Setup(Expression<Action<T>> expression)
         {
             var actionSetup = new ActionSetup<T>(expression);
-            var mockSetupSetting = _mockSetupSettings.RegisterSetup(expression, actionSetup);
-            return actionSetup;
+            var setupSetting = _mockSetupSettings.RegisterSetup(expression, actionSetup);
+            return setupSetting;
         }
 
         //public FunctionSetup Setup(Expression<Func<T>> expression)
