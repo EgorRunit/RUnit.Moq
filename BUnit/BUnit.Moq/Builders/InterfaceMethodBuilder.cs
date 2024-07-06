@@ -80,19 +80,11 @@ namespace BUnit.Moq.Builders
             ilGenerator.Emit(OpCodes.Ldarg_0);
             ilGenerator.Emit(OpCodes.Call, listAddMethodInfo);
 
-
             ilGenerator.Emit(OpCodes.Ldloc_0);                  //Загружаем аргументы функции Execute
             ilGenerator.Emit(OpCodes.Ldstr, methodInfo.ToString());   //Название вызываемой функции
 
             ilGenerator.Emit(OpCodes.Ldloc_0);
             ilGenerator.Emit(OpCodes.Call, executeMethodInfo);
-            //var executeExMethodInfo = proxyMock.GetType().GetMethod("ExecuteEx", BindingFlags.Instance | BindingFlags.Public | BindingFlags.Static);
-            //ilGenerator.Emit(OpCodes.Ldloc_0);
-            //ilGenerator.Emit(OpCodes.Ldtoken, g.MetadataToken);
-            //ilGenerator.Emit(OpCodes.Call, executeExMethodInfo);
-            //ilGenerator.Emit(OpCodes.Ret);
-
-            //ilGenerator.EmitCall(OpCodes.Isinst, executeMethodInfo, executeParameterTypes);
         }
     }
 }

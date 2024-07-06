@@ -18,10 +18,6 @@ namespace BUnit.Moq.Setups
         /// </summary>
         readonly internal int AnyCount;
         /// <summary>
-        /// Согнатура метода при динамическом вызове.
-        /// </summary>
-        readonly internal string MethodCallSignature;
-        /// <summary>
         /// Системная сигнатура метода
         /// </summary>
         readonly internal string MethodOriginalSignature;
@@ -33,24 +29,35 @@ namespace BUnit.Moq.Setups
         public SetupSetting(LambdaExpression lambdaExpression)
         {
             var methodCallExpression = lambdaExpression.Body as MethodCallExpression;
-
-            MethodCallSignature = methodCallExpression.ToString();
-            MethodCallSignature = MethodCallSignature.Substring(MethodCallSignature.IndexOf('.') + 1);
-
             var method = methodCallExpression.Method;
-            MethodOriginalSignature = method.ToString();
-
+            MethodOriginalSignature = methodCallExpression.Method.ToString();
             _setupParameters = methodCallExpression.Arguments.ToSetupParameterList();
             AnyCount = _setupParameters.Where(x => x.SetupArgumentType == SetupArgumentType.AnyValue).Count();
         }
 
-        public static bool operator == (SetupSetting mss1, SetupSetting mss2)
+        public static bool operator ==(SetupSetting mss1, SetupSetting mss2)
         {
+            if (ReferenceEquals(mss1, null))
+            {
+                return false;
+            }
+            if (ReferenceEquals(mss2, null))
+            {
+                return false;
+            }
             return Enumerable.SequenceEqual<SetupArgument>(mss1._setupParameters, mss2._setupParameters);
         }
 
-        public static bool operator != (SetupSetting mss1, SetupSetting mss2)
+        public static bool operator !=(SetupSetting mss1, SetupSetting mss2)
         {
+            if (ReferenceEquals(mss1, null))
+            {
+                return true;
+            }
+            if (ReferenceEquals(mss2, null))
+            {
+                return true;
+            }
             return !Enumerable.SequenceEqual<SetupArgument>(mss1._setupParameters, mss2._setupParameters);
         }
 
@@ -61,7 +68,7 @@ namespace BUnit.Moq.Setups
 
         public override int GetHashCode()
         {
-            return this.MethodCallSignature.GetHashCode();
+            return this.GetHashCode();
         }
 
         public bool Equals(SetupSetting other)

@@ -16,5 +16,15 @@ namespace System.Linq
             }
             return parameters;
         }
+
+        public static List<SetupArgument> ToSetupParameterList(this IEnumerable<object> array)
+        {
+            var parameters = new List<SetupArgument>();
+            foreach (var arrayItem in array)
+            {
+                //parameters.Add(new SetupArgument(arrayItem));
+            }
+            return parameters;
+        }
     }
 }

@@ -50,7 +50,7 @@ namespace BUnit.Moq
         /// <param name="list">Список параметров вызываемого метода двойника.</param>
         public void Execute(string methodSignature, List<object> list)
         {
-            var proxyMock = list.Last() as ProxyMock ;
+            var proxyMock = list.Last() as ProxyMock;
             Console.WriteLine(methodSignature);
             if (list != null)
             {
@@ -61,9 +61,10 @@ namespace BUnit.Moq
             }
             if (proxyMock != null)
             {
-                var parameters = list.GetRange(0, list.Count - 1);
-                Console.WriteLine($"list count = {parameters.Count}");
-                proxyMock.callbackManager.CallbackIfExists(parameters);
+                var parameters = list.ToSetupParameterList();
+                //var parameters = list.GetRange(0, list.Count - 1).Select(x => x as ParameterInfo);
+                //Console.WriteLine($"list count = {parameters.Count}");
+                //proxyMock.callbackManager.CallbackIfExists(parameters);
                 //list.Remove(proxyMock);
             }
         }
