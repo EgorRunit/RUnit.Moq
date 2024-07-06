@@ -61,7 +61,7 @@ namespace BUnit.Moq
             }
             if (proxyMock != null)
             {
-                var parameters = list.ToSetupParameterList();
+                //var parameters = list.ToSetupParameterList();
                 //var parameters = list.GetRange(0, list.Count - 1).Select(x => x as ParameterInfo);
                 //Console.WriteLine($"list count = {parameters.Count}");
                 //proxyMock.callbackManager.CallbackIfExists(parameters);

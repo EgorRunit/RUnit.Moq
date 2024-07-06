@@ -5,15 +5,31 @@ using System.Reflection;
 
 namespace BUnit.Moq.Setups
 {
+    /// <summary>
+    /// Класс предназначен для управления настройками
+    /// переданными в метод Mock.Setup.
+    /// </summary>
     internal class SetupSettings
     {
+        /// <summary>
+        /// Справочник зарегистрированных настроек в методе Mock.Setup.
+        /// </summary>
         Dictionary<string, List<SetupSetting>> _mockSetupSettings;
 
+        /// <summary>
+        /// Конструктор
+        /// </summary>
         internal SetupSettings()
         {
             _mockSetupSettings = new Dictionary<string, List<SetupSetting>>();
         }
 
+        /// <summary>
+        /// Регистрация новой настроки Setup для Mock.Setup.
+        /// </summary>
+        /// <param name="lambdaExpression">Лямда выражения переданно в Mock.Setup.</param>
+        /// <param name="actionSetupBase"></param>
+        /// <returns></returns>
         internal SetupSetting RegisterSetup(LambdaExpression lambdaExpression, ActionSetupBase actionSetupBase)
         {
             var setupSetting = new SetupSetting(lambdaExpression);
@@ -25,7 +41,7 @@ namespace BUnit.Moq.Setups
             else
             {
                 var list = _mockSetupSettings[setupSetting.MethodOriginalSignature];
-                var oldSetupSetting = list.FirstOrDefault(x => x == setupSetting);
+                var oldSetupSetting = list.FirstOrDefault(x => x.EqualsSetupParamaters(setupSetting));
                 if(oldSetupSetting != null)
                 {
                     list.Remove(oldSetupSetting);
@@ -35,9 +51,27 @@ namespace BUnit.Moq.Setups
             return setupSetting;
         }
 
-        internal SetupSetting TryGetSetupSetting(SetupSetting setupSetting)
+        /// <summary>
+        /// Попытка получить SetupSetting настройки которого макимально
+        /// совпадают со списком аргументов вызванного метода.
+        /// Совпадающие настройки замещаются последней.
+        /// </summary>
+        /// <param name="methodOriginalSignature">Системное сигнатура вызываемого метода.</param>
+        /// <param name="methodArguments">Список аргументов вызванного метода.</param>
+        /// <returns>
+        /// SetingSetting или null если подходящего шаблона
+        /// настроект не было найдено.
+        /// </returns>
+        internal SetupSetting TryGetSetupSetting(string methodOriginalSignature, List<object> methodArguments)
         {
-            return null;
+            SetupSetting setupSetting = null;
+            if(_mockSetupSettings.ContainsKey(methodOriginalSignature))
+            {
+                var setupSettings = _mockSetupSettings[methodOriginalSignature];
+                var foundSetupSettings = setupSettings.Where(x => x.EqualsSetupParametersToObjectList(methodArguments)).ToList();
+                setupSetting = foundSetupSettings.OrderBy(x => x.AnyCount).FirstOrDefault();
+            }
+            return setupSetting;
                 
         }
     }

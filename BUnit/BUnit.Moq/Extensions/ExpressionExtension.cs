@@ -13,5 +13,13 @@ namespace System.Linq.Expressions
             var methodSignature = method.ToString();
             return methodSignature;
         }
+
+        public static string GetMethodSignature(this Expression<Action> expression)
+        {
+            var methodCallExpression = expression.Body as MethodCallExpression;
+            var method = methodCallExpression.Method;
+            var methodSignature = method.ToString();
+            return methodSignature;
+        }
     }
 }

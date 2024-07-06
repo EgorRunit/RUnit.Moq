@@ -71,5 +71,43 @@ namespace BUnit.Test.Setups
             Assert.False(ReferenceEquals(setupSetting1, setupSetting2));
         }
 
+        [Fact]
+        public void Get_Last_Duplicate_Expression()
+        {
+            //arrange
+            Expression<Action> expressionAction = () => Write(5, "4444", (byte)3);
+            var methodArguments = new List<object>() { 5, "4444", (byte)3 };
+            
+
+            //act
+            var setupSetting1 = _setupSettings.RegisterSetup(expressionAction, null);
+            var setupSetting2 = _setupSettings.RegisterSetup(expressionAction, null);
+
+            var foundSetupSettings = _setupSettings.TryGetSetupSetting(expressionAction.GetMethodSignature(), methodArguments);
+
+            Assert.True(ReferenceEquals(foundSetupSettings, setupSetting2));
+            Assert.False(ReferenceEquals(foundSetupSettings, setupSetting1));
+        }
+
+        [Fact]
+        public void Get_Last_Duplicate_Expression1()
+        {
+            //arrange
+            var intConst = 5;
+            var stringConst = "rrrrr";
+            var byteConst = (byte)3;
+            Expression<Action> expressionAction = () => Write(intConst, stringConst, byteConst);
+            var methodArguments = new List<object>() { intConst, stringConst, byteConst };
+
+
+            //act
+            var setupSetting1 = _setupSettings.RegisterSetup(expressionAction, null);
+            var setupSetting2 = _setupSettings.RegisterSetup(expressionAction, null);
+
+            var foundSetupSettings = _setupSettings.TryGetSetupSetting(expressionAction.GetMethodSignature(), methodArguments);
+
+            Assert.True(ReferenceEquals(foundSetupSettings, setupSetting2));
+            Assert.False(ReferenceEquals(foundSetupSettings, setupSetting1));
+        }
     }
 }
