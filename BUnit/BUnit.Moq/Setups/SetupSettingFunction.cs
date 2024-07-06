@@ -5,10 +5,15 @@ using System.Text;
 
 namespace BUnit.Moq.Setups
 {
-    internal class SetupSettingFunction : SetupSetting
+    public class SetupSettingFunction : SetupSettingAction
     {
-        public SetupSettingFunction(LambdaExpression lambdaExpression) : base(lambdaExpression)
+        internal SetupSettingFunction(LambdaExpression lambdaExpression) : base(lambdaExpression)
         {
+        }
+
+        public TRetun Return<TRetun>()
+        {
+            return default(TRetun);
         }
     }
 }

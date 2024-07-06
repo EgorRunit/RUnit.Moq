@@ -21,7 +21,7 @@ namespace BUnit.Test.Setups
             Expression<Action> expressionAction = () => Write(5, "4444", (byte)3);
 
             //act
-            var setupSetting = _setupSettings.RegisterSetup(expressionAction, null);
+            var setupSetting = _setupSettings.RegisterSetupAction(expressionAction);
 
             //assert
             Assert.True(setupSetting.AnyCount == 0);
@@ -35,7 +35,7 @@ namespace BUnit.Test.Setups
             Expression<Action> expressionAction = () => Write(5, "4444", new StringBuilder());
 
             //act
-            var setupSetting = _setupSettings.RegisterSetup(expressionAction, null);
+            var setupSetting = _setupSettings.RegisterSetupAction(expressionAction);
 
             //assert
             Assert.True(setupSetting.AnyCount == 1);
@@ -50,7 +50,7 @@ namespace BUnit.Test.Setups
             Expression<Action> expressionAction = () => Write(5, "4444", sb);
 
             //act
-            var setupSetting = _setupSettings.RegisterSetup(expressionAction, null);
+            var setupSetting = _setupSettings.RegisterSetupAction(expressionAction);
 
             //assert
             Assert.True(setupSetting.AnyCount == 0);
@@ -64,8 +64,8 @@ namespace BUnit.Test.Setups
             Expression<Action> expressionAction = () => Write(5, "4444", (byte)3);
 
             //act
-            var setupSetting1 = _setupSettings.RegisterSetup(expressionAction, null);
-            var setupSetting2 = _setupSettings.RegisterSetup(expressionAction, null);
+            var setupSetting1 = _setupSettings.RegisterSetupAction(expressionAction);
+            var setupSetting2 = _setupSettings.RegisterSetupAction(expressionAction);
 
             //assert
             Assert.False(ReferenceEquals(setupSetting1, setupSetting2));
@@ -78,13 +78,12 @@ namespace BUnit.Test.Setups
             Expression<Action> expressionAction = () => Write(5, "4444", (byte)3);
             var methodArguments = new List<object>() { 5, "4444", (byte)3 };
             
-
             //act
-            var setupSetting1 = _setupSettings.RegisterSetup(expressionAction, null);
-            var setupSetting2 = _setupSettings.RegisterSetup(expressionAction, null);
-
+            var setupSetting1 = _setupSettings.RegisterSetupAction(expressionAction);
+            var setupSetting2 = _setupSettings.RegisterSetupAction(expressionAction);
             var foundSetupSettings = _setupSettings.TryGetSetupSetting(expressionAction.GetMethodSignature(), methodArguments);
 
+            //assert
             Assert.True(ReferenceEquals(foundSetupSettings, setupSetting2));
             Assert.False(ReferenceEquals(foundSetupSettings, setupSetting1));
         }
@@ -99,12 +98,12 @@ namespace BUnit.Test.Setups
             Expression<Action> expressionAction = () => Write(intConst, stringConst, byteConst);
             var methodArguments = new List<object>() { intConst, stringConst, byteConst };
 
-
             //act
-            var setupSetting1 = _setupSettings.RegisterSetup(expressionAction, null);
-            var setupSetting2 = _setupSettings.RegisterSetup(expressionAction, null);
+            var setupSetting1 = _setupSettings.RegisterSetupAction(expressionAction);
+            var setupSetting2 = _setupSettings.RegisterSetupAction(expressionAction);
             var foundSetupSettings = _setupSettings.TryGetSetupSetting(expressionAction.GetMethodSignature(), methodArguments);
 
+            //assert
             Assert.NotNull(foundSetupSettings);
             Assert.True(ReferenceEquals(foundSetupSettings, setupSetting2));
             Assert.False(ReferenceEquals(foundSetupSettings, setupSetting1));
@@ -121,12 +120,12 @@ namespace BUnit.Test.Setups
             Expression<Action> expressionAction = () => Write(stringBuilder1, stringConst, byteConst);
             var methodArguments = new List<object>() { stringBuilder1, stringConst, byteConst };
 
-
             //act
-            var setupSetting1 = _setupSettings.RegisterSetup(expressionAction, null);
-            var setupSetting2 = _setupSettings.RegisterSetup(expressionAction, null);
+            var setupSetting1 = _setupSettings.RegisterSetupAction(expressionAction);
+            var setupSetting2 = _setupSettings.RegisterSetupAction(expressionAction);
             var foundSetupSettings = _setupSettings.TryGetSetupSetting(expressionAction.GetMethodSignature(), methodArguments);
 
+            //assert
             Assert.NotNull(foundSetupSettings);
         }
 
@@ -141,12 +140,12 @@ namespace BUnit.Test.Setups
             Expression<Action> expressionAction = () => Write(stringBuilder1, stringConst, byteConst);
             var methodArguments = new List<object>() { stringBuilder2, stringConst, byteConst };
 
-
             //act
-            var setupSetting1 = _setupSettings.RegisterSetup(expressionAction, null);
-            var setupSetting2 = _setupSettings.RegisterSetup(expressionAction, null);
+            var setupSetting1 = _setupSettings.RegisterSetupAction(expressionAction);
+            var setupSetting2 = _setupSettings.RegisterSetupAction(expressionAction);
             var foundSetupSettings = _setupSettings.TryGetSetupSetting(expressionAction.GetMethodSignature(), methodArguments);
 
+            //assert
             Assert.Null(foundSetupSettings);
         }
     }

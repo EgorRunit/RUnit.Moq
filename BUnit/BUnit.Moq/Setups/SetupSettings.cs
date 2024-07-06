@@ -24,23 +24,23 @@ namespace BUnit.Moq.Setups
             _mockSetupSettings = new Dictionary<string, List<SetupSetting>>();
         }
 
-        /// <summary>
-        /// Регистрация новой настроки Setup для Mock.Setup.
-        /// </summary>
-        /// <param name="lambdaExpression">Лямда выражения переданно в Mock.Setup.</param>
-        /// <param name="actionSetupBase"></param>
-        /// <returns></returns>
-        internal SetupSetting RegisterSetup(LambdaExpression lambdaExpression, ActionSetupBase actionSetupBase)
+        internal SetupSettingAction RegisterSetupAction(LambdaExpression lambdaExpression)
         {
-            SetupSetting setupSetting;
-            if(lambdaExpression.ReturnType ==typeof(void))
-            {
-                setupSetting = new SetupSettingAction(lambdaExpression);
-            }
-            else
-            {
-                setupSetting = new SetupSettingFunction(lambdaExpression);
-            }
+            var setupSetting = new SetupSettingAction(lambdaExpression);
+            _register(setupSetting);
+            return setupSetting;
+        }
+
+        internal SetupSettingAction RegisterSetupFunction(LambdaExpression lambdaExpression)
+        {
+            var setupSetting = new SetupSettingFunction(lambdaExpression);
+            _register(setupSetting);
+            return setupSetting;
+        }
+
+
+        void _register(SetupSetting setupSetting)
+        { 
 
             if (!_mockSetupSettings.ContainsKey(setupSetting.MethodOriginalSignature))
             {
@@ -57,7 +57,6 @@ namespace BUnit.Moq.Setups
                 }
                 list.Add(setupSetting);
             }
-            return setupSetting;
         }
 
         /// <summary>

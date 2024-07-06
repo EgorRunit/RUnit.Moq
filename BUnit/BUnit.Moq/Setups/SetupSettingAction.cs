@@ -5,7 +5,7 @@ using System.Text;
 
 namespace BUnit.Moq.Setups
 {
-    internal class SetupSettingAction : SetupSetting
+    public class SetupSettingAction : SetupSetting
     {
         /// <summary>
         /// Сслыка на обрабную функция вызов

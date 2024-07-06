@@ -40,21 +40,16 @@ namespace BUnit.Moq
         }
 
 
-        public SetupSetting Setup(Expression<Action<T>> expression)
+        public SetupSettingAction Setup(Expression<Action<T>> expression)
         {
-            var actionSetup = new ActionSetup<T>(expression);
-            var setupSetting = _mockSetupSettings.RegisterSetup(expression, actionSetup);
-            return setupSetting;
+            var setupSetting = _mockSetupSettings.RegisterSetupAction(expression);
+            return setupSetting as SetupSettingAction;
         }
 
-        //public FunctionSetup Setup(Expression<Func<T>> expression)
-        //{
-        //    //var methodCallExpression = expression.Body as MethodCallExpression;
-        //    //Callback(methodCallExpression);
-        //    //var setup = new Setup(methodCallExpression);
-        //    //_proxyMock.AddCallback(setup);
-        //    //return setup;
-        //    return null;
-        //}
+        public SetupSettingFunction Setup(Expression<Func<T>> expression)
+        {
+            var setupSetting = _mockSetupSettings.RegisterSetupFunction(expression);
+            return setupSetting as SetupSettingFunction;
+        }
     }
 }
