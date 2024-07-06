@@ -90,11 +90,11 @@ namespace BUnit.Test.Setups
         }
 
         [Fact]
-        public void Get_Last_Duplicate_Expression1()
+        public void Get_Last_Duplicate_MemberConstantAccess_Expression()
         {
             //arrange
             var intConst = 5;
-            var stringConst = "rrrrr";
+            var stringConst = "string const";
             var byteConst = (byte)3;
             Expression<Action> expressionAction = () => Write(intConst, stringConst, byteConst);
             var methodArguments = new List<object>() { intConst, stringConst, byteConst };
@@ -103,11 +103,51 @@ namespace BUnit.Test.Setups
             //act
             var setupSetting1 = _setupSettings.RegisterSetup(expressionAction, null);
             var setupSetting2 = _setupSettings.RegisterSetup(expressionAction, null);
-
             var foundSetupSettings = _setupSettings.TryGetSetupSetting(expressionAction.GetMethodSignature(), methodArguments);
 
+            Assert.NotNull(foundSetupSettings);
             Assert.True(ReferenceEquals(foundSetupSettings, setupSetting2));
             Assert.False(ReferenceEquals(foundSetupSettings, setupSetting1));
+        }
+
+
+        [Fact]
+        public void Found_RefernceMemberAccess_Expression()
+        {
+            //arrange
+            var stringBuilder1 = new StringBuilder();
+            var stringConst = "string const";
+            var byteConst = (byte)3;
+            Expression<Action> expressionAction = () => Write(stringBuilder1, stringConst, byteConst);
+            var methodArguments = new List<object>() { stringBuilder1, stringConst, byteConst };
+
+
+            //act
+            var setupSetting1 = _setupSettings.RegisterSetup(expressionAction, null);
+            var setupSetting2 = _setupSettings.RegisterSetup(expressionAction, null);
+            var foundSetupSettings = _setupSettings.TryGetSetupSetting(expressionAction.GetMethodSignature(), methodArguments);
+
+            Assert.NotNull(foundSetupSettings);
+        }
+
+        [Fact]
+        public void NotFound_RefernceMemberAccess_Expression()
+        {
+            //arrange
+            var stringBuilder1 = new StringBuilder();
+            var stringBuilder2 = new StringBuilder();
+            var stringConst = "string const";
+            var byteConst = (byte)3;
+            Expression<Action> expressionAction = () => Write(stringBuilder1, stringConst, byteConst);
+            var methodArguments = new List<object>() { stringBuilder2, stringConst, byteConst };
+
+
+            //act
+            var setupSetting1 = _setupSettings.RegisterSetup(expressionAction, null);
+            var setupSetting2 = _setupSettings.RegisterSetup(expressionAction, null);
+            var foundSetupSettings = _setupSettings.TryGetSetupSetting(expressionAction.GetMethodSignature(), methodArguments);
+
+            Assert.Null(foundSetupSettings);
         }
     }
 }

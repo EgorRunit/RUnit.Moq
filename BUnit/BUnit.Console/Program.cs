@@ -1,6 +1,7 @@
 using BUnit.Moq;
 using BUnit.Moq.Builders;
 using System;
+using System.Diagnostics.CodeAnalysis;
 using System.Reflection;
 using System.Reflection.Emit;
 using System.Text;
@@ -30,8 +31,19 @@ namespace BUnit.Consoles
 
     internal class Program: Z, IT
     {
+        public static void NotNull([NotNull]object? obj)
+        {
+            if (obj == null)
+            {
+                throw new Exception("eeee");
+            }
+        }
         static void Main(string[] args)
         {
+
+            object d = null;
+            NotNull(null);
+            return;
             //замещение
             //string[] colors = { "green", "brown", "blue", "red" };
             //var query1 = colors.Where(x => x.Contains("e"));
