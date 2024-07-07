@@ -39,7 +39,7 @@ namespace BUnit.Moq.Setups
             return this;
         }
 
-        public void Execute(List<object> methodParameters)
+        public void ExecuteCallback(List<object> methodParameters)
         {
             callback.DynamicInvoke(methodParameters.ToArray());
         }

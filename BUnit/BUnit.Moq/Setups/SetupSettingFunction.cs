@@ -37,7 +37,7 @@ namespace BUnit.Moq.Setups
             return this;
         }
 
-        public void Execute(List<object> methodParameters)
+        public void ExecuteCallback(List<object> methodParameters)
         {
             callback.DynamicInvoke(methodParameters.ToArray());
         }
@@ -47,6 +47,19 @@ namespace BUnit.Moq.Setups
         {
             returns = () => x;
             return this;
+        }
+
+
+        public object ExecuteReturn()
+        {
+            if(returns!= null)
+            {
+                return returns();
+            }
+            else
+            {
+                return default;
+            }
         }
     }
 }

@@ -58,7 +58,7 @@ namespace BUnit.Test.Setups
             });
 
             //act
-            setupSetting.Execute(new List<object>() { 5, "444", sb });
+            setupSetting.ExecuteCallback(new List<object>() { 5, "444", sb });
 
             //assert
             Assert.True(sb.ToString() == "string builder");
@@ -82,7 +82,7 @@ namespace BUnit.Test.Setups
             });
 
             //act
-            setupSetting.Execute(new List<object>() { intValue, stringValue, sb });
+            setupSetting.ExecuteCallback(new List<object>() { intValue, stringValue, sb });
 
             //assert
             Assert.True(stringValue == callbackStringValue);
