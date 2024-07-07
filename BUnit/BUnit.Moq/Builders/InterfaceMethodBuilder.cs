@@ -87,10 +87,6 @@ namespace BUnit.Moq.Builders
                     ilGenerator.Emit(OpCodes.Callvirt, listAddMethodInfo);
                 }
             }
-            ilGenerator.Emit(OpCodes.Ldloc_0);
-            ilGenerator.Emit(OpCodes.Ldarg_0);
-            ilGenerator.Emit(OpCodes.Call, listAddMethodInfo);
-
 
             ilGenerator.Emit(OpCodes.Ldloc_0);                  //Загружаем аргументы функции Execute
             ilGenerator.Emit(OpCodes.Ldstr, methodInfo.ToString());   //Название вызываемой функции
