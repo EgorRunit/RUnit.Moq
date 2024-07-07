@@ -22,7 +22,7 @@ namespace BUnit.Moq
 
         }
 
-        public void Execute(string methodSignature, List<object> list)
+        public void Execute(string methodSignature, List<object> list, ProxyMock proxyMock1)
         {
             var proxyMock = list.Last() as ProxyMock;
             var setupSetting = proxyMock.callbackManager.TryGetSetupSetting(methodSignature, list.GetRange(0, list.Count - 1));

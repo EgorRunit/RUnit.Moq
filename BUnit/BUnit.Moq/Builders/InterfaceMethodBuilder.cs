@@ -43,6 +43,7 @@ namespace BUnit.Moq.Builders
         {
             var executeParameterTypes = new Type[] { typeof(string), typeof(List<object>) };
             //var executeMethodInfo = typeof(ProxyMock<T>).GetMethod("Execute", BindingFlags.Instance | BindingFlags.Public | BindingFlags.CreateInstance);
+            //var executeMethodInfo = genericType.GetMethod("Execute", BindingFlags.Instance | BindingFlags.Public | BindingFlags.FlattenHierarchy);
             var executeMethodInfo = genericType.GetMethod("Execute", BindingFlags.Instance | BindingFlags.Public | BindingFlags.FlattenHierarchy);
             //var dd = typeof(ProxyMock<>).m
 
@@ -56,9 +57,13 @@ namespace BUnit.Moq.Builders
             var listAddMethodInfo = typeof(List<object>).GetMethod("Add", BindingFlags.Instance | BindingFlags.Public);
             var methodInfoParameters = methodInfo.GetParameters();
 
+            // ilGenerator.Emit(OpCodes.Ldarg_0);
+
+            //ilGenerator.Emit(OpCodes.Ldloc_0);
+            //ilGenerator.Emit(OpCodes.Nop);
+
             //создаем локальную переменную типа List<object>
             var localList = ilGenerator.DeclareLocal(typeof(List<Object>));
-
             ilGenerator.Emit(OpCodes.Nop);
             ilGenerator.Emit(OpCodes.Newobj, listConstrutorInfo);
             ilGenerator.Emit(OpCodes.Stloc_0);
@@ -86,10 +91,12 @@ namespace BUnit.Moq.Builders
             ilGenerator.Emit(OpCodes.Ldarg_0);
             ilGenerator.Emit(OpCodes.Call, listAddMethodInfo);
 
+
             ilGenerator.Emit(OpCodes.Ldloc_0);                  //Загружаем аргументы функции Execute
             ilGenerator.Emit(OpCodes.Ldstr, methodInfo.ToString());   //Название вызываемой функции
 
             ilGenerator.Emit(OpCodes.Ldloc_0);
+            ilGenerator.Emit(OpCodes.Ldarg_0);
             ilGenerator.Emit(OpCodes.Call, executeMethodInfo);
         }
     }

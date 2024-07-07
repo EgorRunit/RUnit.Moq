@@ -10,7 +10,7 @@ namespace BUnit.Consoles
 {
     public class Test : ProxyMock<IT>
     {
-        internal void G(string str, List<object> list)
+        internal void G(string str, List<object> list, ProxyMock proxyMock)
         {
         }
 
@@ -19,7 +19,7 @@ namespace BUnit.Consoles
             var list = new List<object>();
             list.Add(5);
             list.Add(new StringBuilder());
-            G("reeee", list);
+            G("reeee", list, this);
             
         }
     }
