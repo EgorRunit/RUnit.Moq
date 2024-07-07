@@ -4,6 +4,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
+using System.Runtime.InteropServices;
 
 namespace BUnit.Moq
 {
@@ -21,6 +22,28 @@ namespace BUnit.Moq
 
         }
 
+        public void Execute(string methodSignature, List<object> list)
+        {
+            var proxyMock = list.Last() as ProxyMock;
+            var setupSetting = proxyMock.callbackManager.TryGetSetupSetting(methodSignature, list.GetRange(0, list.Count - 1));
+            if(setupSetting != null)
+            {
+                if (setupSetting is SetupSettingAction)
+                {
+                    (setupSetting as SetupSettingAction).Execute(list.GetRange(0, list.Count - 1));
+                    Console.WriteLine("SetupSettingAction");
+                    var d2 = 4;
+                }
+                else
+                {
+                    Console.WriteLine("SetupSettingFunction");
+                    var d2 = 4;
+                }
+            }
+
+        }
+
+
         public void RegisterCallbackManager(CallbackManager callbackManager)
         {
             this.callbackManager = callbackManager;
@@ -36,11 +59,18 @@ namespace BUnit.Moq
     /// <typeparam name="T">Тестируемы тип.</typeparam>
     public class ProxyMock<T> : ProxyMock  where T : class
     {
-        readonly internal CallbackManager _callbackManager;
-
+        //readonly CallbackManager _callbackManager;
+        string ddddddddd = "rrrrrrrrrrrrrrrrrr";
         public ProxyMock()
         {
-            //Object = TypeFactory.Get<T>(this) as InterfaceClass<T>;
+            //Object =
+            //
+            //TypeFactory.Get<T>(this) as InterfaceClass<T>;
+        }
+
+        void _Ddddd(string d, List<object> list)
+        {
+            callbackManager.TryGetSetupSetting("", null);
         }
 
         /// <summary>
@@ -48,7 +78,7 @@ namespace BUnit.Moq
         /// </summary>
         /// <param name="methodSignature">Системная сигнатура вызываемого метода двойника.</param>
         /// <param name="list">Список параметров вызываемого метода двойника.</param>
-        public void Execute(string methodSignature, List<object> list)
+        public  void Execute1(string methodSignature, List<object> list)
         {
             var proxyMock = list.Last() as ProxyMock;
             Console.WriteLine(methodSignature);
@@ -61,7 +91,27 @@ namespace BUnit.Moq
             }
             if (proxyMock != null)
             {
-                //var parameters = list.ToSetupParameterList();
+                var parameters = new List<object>();
+                for (var i = 0; i < list.Count - 1; i++)
+                {
+                    parameters.Add(list[i]);
+                }
+                _Ddddd(methodSignature, list);
+                var setupSetting = callbackManager.TryGetSetupSetting(methodSignature, list.GetRange(0, list.Count - 1));
+                if(setupSetting != null)
+                {
+                    if(setupSetting is SetupSettingAction)
+                    {
+                        Console.WriteLine("SetupSettingAction");
+                        var d2 = 4;
+                    }
+                    else
+                    {
+                        Console.WriteLine("SetupSettingFunction");
+                        var d2 = 4;
+                    }
+                }
+                //var parameters = lit.ToSetupParameterList();
                 //var parameters = list.GetRange(0, list.Count - 1).Select(x => x as ParameterInfo);
                 //Console.WriteLine($"list count = {parameters.Count}");
                 //proxyMock.callbackManager.CallbackIfExists(parameters);

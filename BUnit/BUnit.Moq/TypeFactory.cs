@@ -32,11 +32,8 @@ namespace BUnit.Moq
         {
             var assemblyName = new AssemblyName("DynamicAssemblyUnitTest");
             _assemblyBuilder = AssemblyBuilder.DefineDynamicAssembly(assemblyName, AssemblyBuilderAccess.Run);
-            _moduleBuilder = _assemblyBuilder.DefineDynamicModule(assemblyName.Name ?? "DynamicAssemblyUnitTest");
-            var ddd = _assemblyBuilder.GetReferencedAssemblies();
-            var sss = _assemblyBuilder.GetLoadedModules();
+            _moduleBuilder = _assemblyBuilder.DefineDynamicModule(assemblyName.Name);
             _interfaceTypeBuilder = new InterfaceTypeBuilder();
-            //AppDomain.CurrentDomain.Load(assemblyName);
         }
 
         /// <summary>

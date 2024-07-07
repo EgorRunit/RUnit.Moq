@@ -16,14 +16,17 @@ namespace BUnit.Moq.Builders
         public Type Build<T>(ModuleBuilder moduleBuilder, InterfaceMethodBuilder<T> mockMethodBuilder) where T : class
         {
             var type = typeof(T);
-            var typeBuilder = moduleBuilder.DefineType($"{type.FullName}UnitTest",   TypeAttributes.Public | TypeAttributes.Class, typeof(ProxyMock<T>));
+            //var typeBuilder = moduleBuilder.DefineType($"{type.FullName}UnitTest",   TypeAttributes.Public | TypeAttributes.Class, typeof(ProxyMock<T>));
+            var typeBuilder = moduleBuilder.DefineType($"{type.FullName}UnitTest",  TypeAttributes.Public | TypeAttributes.Class, typeof(ProxyMock<T>));
+
             typeBuilder.AddInterfaceImplementation(typeof(T));
 
 
+            var genericType = typeof(ProxyMock<>).MakeGenericType(typeof(T));
             var methods = type.GetMethods();
             foreach (var method in methods)
             {
-                mockMethodBuilder.Build(typeBuilder, method);
+                mockMethodBuilder.Build(typeBuilder, method, genericType);
             }
             var createdType = typeBuilder.CreateTypeInfo();
            

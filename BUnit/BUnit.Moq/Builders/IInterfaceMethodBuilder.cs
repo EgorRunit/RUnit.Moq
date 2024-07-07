@@ -1,5 +1,6 @@
 using System.Reflection.Emit;
 using System.Reflection;
+using System;
 
 namespace BUnit.Moq.Builders
 {
@@ -13,6 +14,6 @@ namespace BUnit.Moq.Builders
         /// </summary>
         /// <param name="typeBuilder"></param>
         /// <param name="methodInfo"></param>
-        void Build(TypeBuilder typeBuilder, MethodInfo methodInfo);
+        void Build(TypeBuilder typeBuilder, MethodInfo methodInfo, Type genericType);
     }
 }

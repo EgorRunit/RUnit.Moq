@@ -43,13 +43,13 @@ namespace BUnit.Moq
         public SetupSettingAction Setup(Expression<Action<T>> expression)
         {
             var setupSetting = _mockSetupSettings.RegisterSetupAction(expression);
-            return setupSetting as SetupSettingAction;
+            return setupSetting;
         }
 
-        public SetupSettingFunction Setup(Expression<Func<T>> expression)
+        public SetupSettingFunction Setup<TResult>(Expression<Func<T, TResult>> expression)
         {
             var setupSetting = _mockSetupSettings.RegisterSetupFunction(expression);
-            return setupSetting as SetupSettingFunction;
+            return setupSetting;
         }
     }
 }

@@ -9,7 +9,7 @@ namespace BUnit.Moq.Setups
     /// Класс предназначен для управления настройками
     /// переданными в метод Mock.Setup.
     /// </summary>
-    internal class SetupSettings
+    public class SetupSettings
     {
         /// <summary>
         /// Справочник зарегистрированных настроек в методе Mock.Setup.
@@ -31,7 +31,7 @@ namespace BUnit.Moq.Setups
             return setupSetting;
         }
 
-        internal SetupSettingAction RegisterSetupFunction(LambdaExpression lambdaExpression)
+        internal SetupSettingFunction RegisterSetupFunction(LambdaExpression lambdaExpression)
         {
             var setupSetting = new SetupSettingFunction(lambdaExpression);
             _register(setupSetting);
@@ -70,7 +70,7 @@ namespace BUnit.Moq.Setups
         /// SetingSetting или null если подходящего шаблона
         /// настроект не было найдено.
         /// </returns>
-        internal SetupSetting TryGetSetupSetting(string methodOriginalSignature, List<object> methodArguments)
+        public SetupSetting TryGetSetupSetting(string methodOriginalSignature, List<object> methodArguments)
         {
             SetupSetting setupSetting = null;
             if(_mockSetupSettings.ContainsKey(methodOriginalSignature))

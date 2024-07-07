@@ -11,19 +11,20 @@ namespace BUnit.Moq.Builders
 {
     public class InterfaceMethodBuilder<T> : IInterfaceMethodBuilder<T> where T : class
     {
-        public void Build(TypeBuilder typeBuilder, MethodInfo methodInfo)
+        public void Build(TypeBuilder typeBuilder, MethodInfo methodInfo, Type genericType)
         {
+            var dsddd = methodInfo.GetParameters().Select(x => x.ParameterType).ToArray();
+
             var methodBuilder = typeBuilder.DefineMethod(
                 methodInfo.Name,
-                MethodAttributes.Public | MethodAttributes.Virtual | MethodAttributes.CheckAccessOnOverride,
+                MethodAttributes.Public | MethodAttributes.Virtual,
                 methodInfo.ReturnType,
                 methodInfo.GetParameters().Select(x => x.ParameterType).ToArray());
 
-            
+            methodBuilder.InitLocals= true;
 
-            //typeBuilder.GetMethod("Execute", BindingFlags.Public | BindingFlags.CreateInstance);
             var ilGenerator = methodBuilder.GetILGenerator();
-            _generateEntryParameters(ilGenerator, methodInfo);
+            _generateEntryParameters(ilGenerator, methodInfo, genericType);
 
             if (methodInfo.ReturnType.Name != "Void")
             {
@@ -33,15 +34,17 @@ namespace BUnit.Moq.Builders
             }
             else
             {
+                ilGenerator.Emit(OpCodes.Nop);
                 ilGenerator.Emit(OpCodes.Ret);
             }
         }
 
-        void _generateEntryParameters( ILGenerator ilGenerator, MethodInfo methodInfo)
+        void _generateEntryParameters( ILGenerator ilGenerator, MethodInfo methodInfo, Type genericType)
         {
             var executeParameterTypes = new Type[] { typeof(string), typeof(List<object>) };
-            var executeMethodInfo = typeof(ProxyMock<T>).GetMethod("Execute", BindingFlags.Instance | BindingFlags.Public | BindingFlags.Static);
-
+            //var executeMethodInfo = typeof(ProxyMock<T>).GetMethod("Execute", BindingFlags.Instance | BindingFlags.Public | BindingFlags.CreateInstance);
+            var executeMethodInfo = genericType.GetMethod("Execute", BindingFlags.Instance | BindingFlags.Public | BindingFlags.FlattenHierarchy);
+            //var dd = typeof(ProxyMock<>).m
 
 
             if (executeMethodInfo == null)
@@ -55,8 +58,11 @@ namespace BUnit.Moq.Builders
 
             //создаем локальную переменную типа List<object>
             var localList = ilGenerator.DeclareLocal(typeof(List<Object>));
+
+            ilGenerator.Emit(OpCodes.Nop);
             ilGenerator.Emit(OpCodes.Newobj, listConstrutorInfo);
-            ilGenerator.Emit(OpCodes.Stloc, localList);
+            ilGenerator.Emit(OpCodes.Stloc_0);
+
 
             //Заполняем список значениями аргументов
             for (var i = 0; i < methodInfoParameters.Length; i++)

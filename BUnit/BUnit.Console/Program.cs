@@ -8,7 +8,23 @@ using System.Text;
 
 namespace BUnit.Consoles
 {
-    internal interface IT
+    public class Test : ProxyMock<IT>
+    {
+        internal void G(string str, List<object> list)
+        {
+        }
+
+        internal void DDD()
+        {
+            var list = new List<object>();
+            list.Add(5);
+            list.Add(new StringBuilder());
+            G("reeee", list);
+            
+        }
+    }
+
+    public  interface IT
     {
         void G();
     }

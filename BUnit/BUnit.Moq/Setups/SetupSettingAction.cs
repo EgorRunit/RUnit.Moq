@@ -16,23 +16,27 @@ namespace BUnit.Moq.Setups
         {
         }
 
-        public void Callback(Action action)
-        {
-//            callback = () => action.DynamicInvoke(buildDynamicCallback());
-        }
-
-        public void Callback<T1>(Action<T1> action)
-        {
-//            callback = () => action.DynamicInvoke(buildDynamicCallback());
-        }
-        public void Callback<T1, T2>(Action<T1, T2> action)
-        {
-//            callback = () => action.DynamicInvoke(buildDynamicCallback());
-        }
-
-        public void Callback<T1, T2, T3>(Action<T1, T2, T3> action)
+        public SetupSettingAction Callback(Action action)
         {
             callback = action;
+            return this;
+        }
+
+        public SetupSettingAction Callback<T1>(Action<T1> action)
+        {
+            callback = action;
+            return this;
+        }
+        public SetupSettingAction Callback<T1, T2>(Action<T1, T2> action)
+        {
+            callback = action;
+            return this;               
+        }
+
+        public SetupSettingAction Callback<T1, T2, T3>(Action<T1, T2, T3> action)
+        {
+            callback = action;
+            return this;
         }
 
         public void Execute(List<object> methodParameters)

@@ -10,6 +10,7 @@ namespace RUnit.Test.TestClasses
     {
         void Write(int text);
         void Write1(StringBuilder sb);
+        int Write2(StringBuilder sb);
     }
 
     public class Test : ITest
