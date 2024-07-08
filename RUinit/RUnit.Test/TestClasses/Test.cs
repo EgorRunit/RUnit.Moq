@@ -9,8 +9,7 @@ namespace RUnit.Test.TestClasses
     public interface ITest
     {
         void Write(int text);
-        void Write1(StringBuilder sb);
-        int Write2(StringBuilder sb);
+        int Write1(StringBuilder sb);
     }
 
     public class Test : ITest
@@ -20,9 +19,10 @@ namespace RUnit.Test.TestClasses
             Console.WriteLine(text);
         }
 
-        public void Write1(StringBuilder sb)
+        public int Write1(StringBuilder sb)
         {
             Console.WriteLine(sb);
+            return 1;
         }
     }
 }

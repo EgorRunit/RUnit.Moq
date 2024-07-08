@@ -57,30 +57,9 @@ namespace BUnit.Consoles
         static void Main(string[] args)
         {
 
-            //замещение
-            //string[] colors = { "green", "brown", "blue", "red" };
-            //var query1 = colors.Where(x => x.Contains("e"));
-            //query1 = colors.Where(x => x.Contains("n"));
-            //Console.WriteLine(query1.Count());
-
-            //var ch = "e";
-            //var query2 = colors.Where(x => x.Contains(ch));
-            //ch = "n";
-            //query2 = colors.Where(x => x.Contains(ch));
-            //Console.WriteLine(query2.Count());
-            //где упаковка
-            //int ee = 5;
-            //ee.ToString();
-            //ee.GetType();
-            //Console.WriteLine("{0} {1}", 1 % 3, 8 % 3);
-            //Car c = new Car();
-            //c.Go();
-            //Vehicle v = new Vehicle();
-            //v.Go();
-            //v = c;
-            //v.Go();
+            return;
             var _ittMock = new Mock<ITT>();
-            _ittMock.Verify(x => x.Write(It.Any<int>()));
+            //_ittMock.Verify(x => x.Write(It.Any<int>()));
             //var sb = new StringBuilder("eeeeeee");
             //_ittMock.Setup(x => x.Write("d", sb)).Callback<string, StringBuilder>((x1, x2) =>
             //{
@@ -119,6 +98,20 @@ namespace BUnit.Consoles
             //createdType.Write("dd", "ddd");
 
         }
+    }
+
+    public static class SetupActionExtrension
+    {
+    }
+
+    public class SetupAction
+    {
+
+    }
+
+    public class SetupFunction
+    {
+
     }
 
     public interface ITT

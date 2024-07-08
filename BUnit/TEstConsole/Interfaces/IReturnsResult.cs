@@ -4,9 +4,12 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace RUnIt.Moq.Interfaces
+namespace TEstConsole.Interfaces
 {
-    public interface ISetupList : IReadOnlyList<ISetup>
+    public interface IReturnsResult
+    {
+    }
+    public interface IReturnsResult<T>
     {
     }
 }

@@ -1,8 +1,9 @@
+using BUnit.Moq.Enums;
 using System;
 using System.Collections.Generic;
 using System.Text;
 
-namespace BUnit.Moq.Verifies
+namespace BUnit.Moq.Structs
 {
     public struct Times
     {

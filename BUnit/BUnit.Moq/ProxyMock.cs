@@ -22,24 +22,23 @@ namespace BUnit.Moq
 
         }
 
-        public object Execute(string methodSignature, List<object> list, ProxyMock proxyMock)
+        public void Execute(string methodSignature, List<object> list, ProxyMock proxyMock)
         {
-            var setupSetting = proxyMock.callbackManager.TryGetSetupSetting(methodSignature, list);
-            if(setupSetting != null)
-            {
-                if (setupSetting is SetupSettingAction)
-                {
-                    (setupSetting as SetupSettingAction).ExecuteCallback(list);
-                    return typeof(void);
-                }
-                else
-                {
-                    var setupSettingFunction = setupSetting as SetupSettingFunction;
-                    setupSettingFunction.ExecuteCallback(list);
-                    return setupSettingFunction.ExecuteReturn();
-                }
-            }
-            return 666;
+            //var setupSetting = proxyMock.callbackManager.TryGetSetupSetting(methodSignature, list);
+            //if(setupSetting != null)
+            //{
+            //    if (setupSetting is SetupSettingAction setupSettingAction)
+            //    {
+            //        setupSettingAction.ExecuteCallback(list);
+            //        //return typeof(void);
+            //    }
+            //    else
+            //    {
+            //        //var setupSettingFunction = setupSetting as SetupSettingFunction<ProxyMock,;
+            //        //setupSettingFunction.ExecuteCallback(list);
+            //        //return setupSettingFunction.ExecuteReturn();
+            //    }
+            //}
         }
 
 

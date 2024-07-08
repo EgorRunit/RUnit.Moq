@@ -1,3 +1,4 @@
+using BUnit.Interfaces;
 using System.Collections.Generic;
 using System.Linq;
 using System.Linq.Expressions;
@@ -24,16 +25,18 @@ namespace BUnit.Moq.Setups
             _mockSetupSettings = new Dictionary<string, List<SetupSetting>>();
         }
 
-        internal SetupSettingAction RegisterSetupAction(LambdaExpression lambdaExpression)
+        internal SetupSettingAction<TMock> RegisterSetupAction<TMock>(LambdaExpression lambdaExpression)
+            where TMock : class
         {
-            var setupSetting = new SetupSettingAction(lambdaExpression);
+            var setupSetting = new SetupSettingAction<TMock>(lambdaExpression);
             _register(setupSetting);
             return setupSetting;
         }
 
-        internal SetupSettingFunction RegisterSetupFunction(LambdaExpression lambdaExpression)
+        internal ISetup<ProxyMock, TResult> RegisterSetupFunction<TMock, TResult>(LambdaExpression lambdaExpression)
+            where TMock : class
         {
-            var setupSetting = new SetupSettingFunction(lambdaExpression);
+            var setupSetting = new SetupSettingFunction<ProxyMock, TResult>(lambdaExpression) ;
             _register(setupSetting);
             return setupSetting;
         }

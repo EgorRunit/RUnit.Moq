@@ -2,7 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 
-namespace BUnit.Moq.Verifies
+namespace BUnit.Moq.Enums
 {
     internal enum TimeKind
     {

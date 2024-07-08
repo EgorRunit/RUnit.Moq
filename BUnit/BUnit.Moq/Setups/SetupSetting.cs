@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Linq.Expressions;
@@ -9,17 +10,20 @@ namespace BUnit.Moq.Setups
     /// </summary>
     public abstract class SetupSetting
     {
-        readonly List<SetupArgument> _setupParameters;
+        /// <summary>
+        /// Коллекйия паттернов для вызова методов.
+        /// </summary>
+        List<SetupArgument> _setupParameters;
 
         /// <summary>
         /// Количество в лямда выражения аргументов с любым значением.
         /// Чем их большеб тем меньшк ранг настройки выражения для Mock.Setup.
         /// </summary>
-        readonly internal int AnyCount;
+        internal int AnyCount { get; private set; }
         /// <summary>
         /// Системная сигнатура метода
         /// </summary>
-        readonly internal string MethodOriginalSignature;
+        internal string MethodOriginalSignature { get; private set; }
 
         /// <summary>
         /// Конструктор.
@@ -32,24 +36,6 @@ namespace BUnit.Moq.Setups
             MethodOriginalSignature = methodCallExpression.Method.ToString();
             _setupParameters = methodCallExpression.Arguments.ToSetupParameterList();
             AnyCount = _setupParameters.Where(x => x.SetupArgumentType == SetupArgumentType.AnyValue).Count();
-        }
-
-        protected object[] buildDynamicCallback()
-        {
-            //var paramameters = new object[methodCallExpression.Arguments.Count];
-            //for (var i = 0; i < methodCallExpression.Arguments.Count; i++)
-            //{
-            //    var arg = methodCallExpression.Arguments[i];
-            //    switch (arg.NodeType)
-            //    {
-            //        case ExpressionType.Constant:
-            //            var constantArg = (ConstantExpression)arg;
-            //            paramameters[i] = constantArg.Value;
-            //            break;
-            //    }
-            //}
-            //return paramameters;
-            return null;
         }
 
         /// <summary>

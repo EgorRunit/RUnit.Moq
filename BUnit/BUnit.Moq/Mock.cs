@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq.Expressions;
+using BUnit.Interfaces;
 using BUnit.Moq.Setups;
 
 namespace BUnit.Moq
@@ -40,15 +41,15 @@ namespace BUnit.Moq
         }
 
 
-        public SetupSettingAction Setup(Expression<Action<T>> expression)
+        public ISetup<ProxyMock> Setup(Expression<Action<T>> expression)
         {
-            var setupSetting = _mockSetupSettings.RegisterSetupAction(expression);
+            var setupSetting = _mockSetupSettings.RegisterSetupAction<ProxyMock>(expression);
             return setupSetting;
         }
-
-        public SetupSettingFunction Setup<TResult>(Expression<Func<T, TResult>> expression)
+         
+        public ISetup<ProxyMock, TResult> Setup<TResult>(Expression<Func<T, TResult>> expression)
         {
-            var setupSetting = _mockSetupSettings.RegisterSetupFunction(expression);
+            var setupSetting = _mockSetupSettings.RegisterSetupFunction<ProxyMock, TResult>(expression);
             return setupSetting;
         }
     }
