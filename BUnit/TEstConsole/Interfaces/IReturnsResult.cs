@@ -6,9 +6,6 @@ using System.Threading.Tasks;
 
 namespace TEstConsole.Interfaces
 {
-    public interface IReturnsResult
-    {
-    }
     public interface IReturnsResult<T>
     {
     }

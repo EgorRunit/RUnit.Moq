@@ -6,13 +6,15 @@ using System.Threading.Tasks;
 
 namespace TEstConsole.Interfaces
 {
-    public interface ISetup<T> : ICallback<ICallbackResult>
+    public interface ISetup<T> :
+        ICallback<ICallbackResult>
         where T : class
     {
     }
 
-    public interface ISetup<T, TResult> : ICallback<IReturns<IReturnsResult>>,
-        IReturns<T>
+    public interface ISetup<T, TResult> :
+        ICallback<IReturns<T, TResult>>,
+        IReturns<T,TResult>
         where T : class
     { 
     }

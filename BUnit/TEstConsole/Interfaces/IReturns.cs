@@ -6,10 +6,10 @@ using System.Threading.Tasks;
 
 namespace TEstConsole.Interfaces
 {
-    public interface IReturns<TResult>
+    public interface IReturns<T, TResult>
     {
-        TResult Returns<TResult>();
-        TResult Returns<T1, TResult>(T1 t1);
-        TResult Returns<T1, T2, TResult>(T1 t1, T2 t2);
+        IReturnsResult<T> Returns(Func<TResult> valueFunction);
+        IReturnsResult<T> Returns<T1>(Func<T1, TResult> valueFunction);
+        IReturnsResult<T> Returns<T1, T2>(Func<T1, T2, TResult> valueFunction);
     }
 }

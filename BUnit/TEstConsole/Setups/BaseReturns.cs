@@ -7,22 +7,24 @@ using TEstConsole.Interfaces;
 
 namespace TEstConsole.Setups
 {
-    public class BaseReturns<T> : CallbackBase<IReturnsResult<T>>, IReturns where T : class
+    public class BaseReturns<T, TResult> : CallbackBase<IReturnsResult<T>>,
+//        ISetup<T, TResult>,
+        IReturns<T, TResult> where T : class
     {
 
-        public IReturnsResult Returns<TResult>()
+        public IReturnsResult<T> Returns(Func<TResult> valueFunction)
         {
            
             throw new NotImplementedException();
         }
 
-        public IReturnsResult Returns<T1, TResult>(T1 t1)
+        public IReturnsResult<T> Returns<T1>(Func<T1, TResult> valueFunction)
         {
-            Console.WriteLine($"Returns<T1, TResult>(T1 t1) = {t1}");
+            Console.WriteLine($"Returns<T1, TResult>(T1 t1) = {valueFunction}");
             return null;
         }
 
-        public IReturnsResult Returns<T1, T2, TResult>(T1 t1, T2 t2)
+        public IReturnsResult<T> Returns<T1, T2>(Func<T1, T2, TResult> valueFunction)
         {
             throw new NotImplementedException();
         }

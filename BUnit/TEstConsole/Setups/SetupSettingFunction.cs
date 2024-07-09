@@ -7,7 +7,7 @@ using TEstConsole.Interfaces;
 
 namespace TEstConsole.Setups
 {
-    public class SetupSettingFunction<T, TResult> : BaseReturns<IReturns>, IReturns
+    public class SetupSettingFunction<T, TResult> : BaseReturns<T, TResult>
         where T : class
     {
         public SetupSettingFunction()
