@@ -24,7 +24,15 @@ namespace TEstConsole.Setups
         public TResult Callback<T1, T2>(Action<T1, T2> action)
         {
             Console.WriteLine($"Callback<T1, T2>(Action<T1, T2> action) = {action}");
-            return null;
+            var type1 = typeof(TResult);
+            var type2 = typeof(T1);
+            var type3 = typeof(T2);
+            var dddd = new CallbackBase<IReturns<TResult, TResult>>();
+            var dddd1 = dddd as TResult;
+            var result = new CallbackResult<TResult>();
+            var dss = result as TResult;
+            //var sss = result as TResult;
+            return dss;
         }
     }
 

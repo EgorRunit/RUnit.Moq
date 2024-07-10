@@ -8,7 +8,9 @@ using Void = TEstConsole.Interfaces;
 
 namespace TEstConsole.Setups
 {
-    public class SetupSettingAction<T> : CallbackBase<ICallbackResult>, ISetup<T> where T : class
+    public class SetupSettingAction<T> :
+        CallbackBase<ICallbackResult>,
+        ISetup<T> where T : class
     {
         public SetupSettingAction()
         {

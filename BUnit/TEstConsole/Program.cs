@@ -2,15 +2,35 @@ using TEstConsole.Setups;
 
 namespace TEstConsole
 {
+    public interface ITestInterface1<T1> { }
+    public interface ITestInterface2<T1,T2> : ITestInterface1<T1> { }
+
+    public static class DDD
+    {
+        public static object Get1(this ITestInterface1 self)
+        {
+            return (object)self;
+        }
+    }
+
+
+    public class TestMock<T>
+    {
+
+    }
+
     internal class Program
     {
         static void Main(string[] args)
         {
+
+
+            return;
             var mock = new Mock<IMockTestClass>();
-            var setup1 = mock.Setup(x => x.Write(5));
+            //var setup1 = mock.Setup(x => x.Write(5));
             var setup2 = mock.Setup(x => x.Write(5, 5));
 
-            var callback1 = setup1.Callback<int>(x=> { });
+            //var callback1 = setup1.Callback<int>(x=> { });
             var callback2 = setup2.Callback<int, int>((x1, x2) => { });
 
             //callback2

@@ -7,9 +7,10 @@ using TEstConsole.Interfaces;
 
 namespace TEstConsole.Setups
 {
-    public class BaseReturns<T, TResult> : CallbackBase<IReturnsResult<T>>,
-//        ISetup<T, TResult>,
-        IReturns<T, TResult> where T : class
+    public class BaseReturns<T, TResult> :
+        CallbackBase<IReturnsResult<T>>,
+        IReturns<T, TResult>
+        where T : class
     {
 
         public IReturnsResult<T> Returns(Func<TResult> valueFunction)
@@ -20,6 +21,7 @@ namespace TEstConsole.Setups
 
         public IReturnsResult<T> Returns<T1>(Func<T1, TResult> valueFunction)
         {
+            //this.r
             Console.WriteLine($"Returns<T1, TResult>(T1 t1) = {valueFunction}");
             return null;
         }

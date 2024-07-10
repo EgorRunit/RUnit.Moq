@@ -23,4 +23,10 @@ namespace TEstConsole
             return setupSettingFunction;
         }
     }
+
+
+    public interface FFF
+    {
+        int DF { get; }
+    }
 }

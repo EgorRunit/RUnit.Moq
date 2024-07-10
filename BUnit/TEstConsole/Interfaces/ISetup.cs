@@ -13,8 +13,7 @@ namespace TEstConsole.Interfaces
     }
 
     public interface ISetup<T, TResult> :
-        ICallback<IReturns<T, TResult>>,
-        IReturns<T,TResult>
+        ICallback<IReturns<T, TResult>>
         where T : class
     { 
     }

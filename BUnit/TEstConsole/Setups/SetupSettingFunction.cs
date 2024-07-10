@@ -7,11 +7,14 @@ using TEstConsole.Interfaces;
 
 namespace TEstConsole.Setups
 {
-    public class SetupSettingFunction<T, TResult> : BaseReturns<T, TResult>
+    public class SetupSettingFunction<T, TResult> :
+        CallbackBase<IReturns<T, TResult>>,
+        ISetup<T,TResult>
         where T : class
     {
         public SetupSettingFunction()
         {
+            
         }
     }
 }
