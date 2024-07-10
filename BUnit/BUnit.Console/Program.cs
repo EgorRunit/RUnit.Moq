@@ -8,21 +8,21 @@ using System.Text;
 
 namespace BUnit.Consoles
 {
-    public class Test : ProxyMock<IT>
-    {
-        internal void G(string str, List<object> list, ProxyMock proxyMock)
-        {
-        }
+    //public class Test : ProxyMock<IT>
+    //{
+    //    internal void G(string str, List<object> list, ProxyMock proxyMock)
+    //    {
+    //    }
 
-        internal void DDD()
-        {
-            var list = new List<object>();
-            list.Add(5);
-            list.Add(new StringBuilder());
-            G("reeee", list, this);
+    //    internal void DDD()
+    //    {
+    //        var list = new List<object>();
+    //        list.Add(5);
+    //        list.Add(new StringBuilder());
+    //        G("reeee", list, this);
             
-        }
-    }
+    //    }
+    //}
 
     public  interface IT
     {
@@ -58,7 +58,7 @@ namespace BUnit.Consoles
         {
 
             return;
-            var _ittMock = new Mock<ITT>();
+            //var _ittMock = new Mock<ITT>();
             //_ittMock.Verify(x => x.Write(It.Any<int>()));
             //var sb = new StringBuilder("eeeeeee");
             //_ittMock.Setup(x => x.Write("d", sb)).Callback<string, StringBuilder>((x1, x2) =>

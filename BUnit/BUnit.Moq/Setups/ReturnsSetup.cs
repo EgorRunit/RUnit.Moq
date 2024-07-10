@@ -4,9 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace TEstConsole.Setups
+namespace BUnit.Moq.Setups
 {
-    public struct Times
+    public class ReturnsSetup<TMock, TReturnValue> : ReturnsFunction<TMock, TReturnValue>
     {
     }
 }

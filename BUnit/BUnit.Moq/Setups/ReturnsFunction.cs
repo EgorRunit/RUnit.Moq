@@ -3,9 +3,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using TestConsole2.Interfaces;
 
-namespace TestConsole2.Setups
+namespace BUnit.Moq.Setups
 {
     public interface IReturnsFunction<TReturnValue>
     {
@@ -17,8 +16,7 @@ namespace TestConsole2.Setups
 
 
     public class ReturnsFunction<TMock, TReturnValue> :
-        CallbackFunctions<ReturnsThrow<TMock, TReturnValue>>,
-        ISetup<TMock, TReturnValue>
+        CallbackFunctions<ReturnsThrow<TMock, TReturnValue>>
     {
         public ReturnsFunction()
         {

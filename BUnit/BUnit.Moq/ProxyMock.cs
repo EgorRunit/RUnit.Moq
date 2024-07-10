@@ -8,11 +8,6 @@ using System.Runtime.InteropServices;
 
 namespace BUnit.Moq
 {
-    public interface IProxyMock
-    {
-        //ProxyMock<T> GetProxyMock();
-    }
-
     public class ProxyMock
     {
         public CallbackManager callbackManager;
@@ -24,8 +19,8 @@ namespace BUnit.Moq
 
         public void Execute(string methodSignature, List<object> list, ProxyMock proxyMock)
         {
-            //var setupSetting = proxyMock.callbackManager.TryGetSetupSetting(methodSignature, list);
-            //if(setupSetting != null)
+            //var setupSetting = proxyMock.callbackManager.TryGetSetup(methodSignature, list);
+            //if (setupSetting != null)
             //{
             //    if (setupSetting is SetupSettingAction setupSettingAction)
             //    {
@@ -54,8 +49,8 @@ namespace BUnit.Moq
     /// <summary>
     /// Двойник тестируемого типа.
     /// </summary>
-    /// <typeparam name="T">Тестируемы тип.</typeparam>
-    public class ProxyMock<T> : ProxyMock  where T : class
+    /// <typeparam name="TMock">Тестируемы тип.</typeparam>
+    public class ProxyMock<TMock> : ProxyMock where TMock : class
     {
     }
 }

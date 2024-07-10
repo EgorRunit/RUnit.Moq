@@ -7,7 +7,7 @@ namespace TestConsole2
         static void Main(string[] args)
         {
             var setupCallback = new CallbackSetup<ITestClass>();
-            setupCallback.Callback(() => { Console.WriteLine("Вызов void callback"); });
+            setupCallback .Callback(() => { Console.WriteLine("Вызов void callback"); });
             setupCallback.Execute(new List<object>());
 
             Console.WriteLine("----------------------------------------");

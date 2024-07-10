@@ -21,7 +21,7 @@ namespace BUnit.Moq.Builders
                 methodInfo.ReturnType,
                 methodInfo.GetParameters().Select(x => x.ParameterType).ToArray());
 
-            methodBuilder.InitLocals= true;
+            methodBuilder.InitLocals = true;
 
             var ilGenerator = methodBuilder.GetILGenerator();
             _generateEntryParameters(ilGenerator, methodInfo, genericType);
@@ -39,7 +39,7 @@ namespace BUnit.Moq.Builders
             }
         }
 
-        void _generateEntryParameters( ILGenerator ilGenerator, MethodInfo methodInfo, Type genericType)
+        void _generateEntryParameters(ILGenerator ilGenerator, MethodInfo methodInfo, Type genericType)
         {
             var executeParameterTypes = new Type[] { typeof(string), typeof(List<object>) };
             //var executeMethodInfo = typeof(ProxyMock<T>).GetMethod("Execute", BindingFlags.Instance | BindingFlags.Public | BindingFlags.CreateInstance);

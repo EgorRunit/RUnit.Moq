@@ -17,7 +17,7 @@ namespace BUnit.Moq.Builders
         {
             var type = typeof(T);
             //var typeBuilder = moduleBuilder.DefineType($"{type.FullName}UnitTest",   TypeAttributes.Public | TypeAttributes.Class, typeof(ProxyMock<T>));
-            var typeBuilder = moduleBuilder.DefineType($"{type.FullName}UnitTest",  TypeAttributes.Public | TypeAttributes.Class, typeof(ProxyMock<T>));
+            var typeBuilder = moduleBuilder.DefineType($"{type.FullName}UnitTest", TypeAttributes.Public | TypeAttributes.Class, typeof(ProxyMock<T>));
 
             typeBuilder.AddInterfaceImplementation(typeof(T));
 
@@ -29,7 +29,7 @@ namespace BUnit.Moq.Builders
                 mockMethodBuilder.Build(typeBuilder, method, genericType);
             }
             var createdType = typeBuilder.CreateTypeInfo();
-           
+
             if (createdType == null)
             {
                 throw new Exception();

@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace TestConsole2.Setups
+namespace BUnit.Moq.Setups
 {
     public class ReturnsResult<TReturnValue>
     {

@@ -3,14 +3,13 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using TestConsole2.Interfaces;
 
-namespace TestConsole2.Setups
+namespace BUnit.Moq.Setups
 {
     public class CallbackFunctions<TResult>
     {
         TResult _callbackResult;
-        protected Delegate? callback;
+        protected Delegate callback;
 
 
         public CallbackFunctions()
@@ -32,9 +31,22 @@ namespace TestConsole2.Setups
             return _callbackResult;
         }
 
+        public TResult Callback<T1, T2>(Action<T1, T2> action)
+        {
+            callback = action;
+            Console.WriteLine($"Callback<TResult>(Action<T1, T2> action) = {action} Type = {GetType()}");
+            return _callbackResult;
+        }
+
+
+
+
+
         public void Execute(List<object> methodParameters)
         {
-            callback?.DynamicInvoke(methodParameters.ToArray());
+            callback.DynamicInvoke(methodParameters.ToArray());
         }
+
+
     }
 }

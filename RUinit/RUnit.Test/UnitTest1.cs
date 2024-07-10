@@ -129,27 +129,24 @@ namespace RUnit.Test
         [Fact]
         public void Test1()
         {
-            var action = new SetupAction();
-            action.Callback<int,int, string>(4, 5);
-            action.InnerCallback.DynamicInvoke();
-            var func = new SetupFunction();
-            func. .Callback<int,int>(4, 5).;
-            //func.SetupActionCallbackWrite().SetupActionReturnWrite();
 
 
             var dd = Timess.Once;
 
             var mock = new Mock<TestClasses.ITest>();
-            mock.Setup(x => x.Write(It.IsAny<int>()));
+            mock.Setup(x => x.Write(It.IsAny<int>()))
+                .Callback<int>(x => { });
+            //.Callback<int>(x => { });
+
             mock.Setup(x => x.Write1(new StringBuilder()))
 
-                
+
                 .Callback<string>((x) =>
                 {
                     Console.WriteLine("Mock write string");
                 })
                 
-                .Returns(null);
+                .Returns(null).;
 
             mock.Object.Write1(new StringBuilder());
             mock.Verify(x=> x.Write1(new StringBuilder()), () => { return Times.Once(); });

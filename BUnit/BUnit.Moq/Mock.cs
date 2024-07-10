@@ -1,56 +1,38 @@
 using System;
-using System.Collections.Generic;
 using System.Linq.Expressions;
-using BUnit.Interfaces;
 using BUnit.Moq.Setups;
 
 namespace BUnit.Moq
 {
     /// <summary>
-    /// Класс настройки поведения тестируемого типа
+    /// Класс настройки поведения тестируемого типа.
     /// </summary>
-    /// <typeparam name="T">Тустируемый тип</typeparam>
-    public partial class Mock<T> where T : class
+    /// <typeparam name="T">Тестируемый тип.</typeparam>
+    public class Mock<TMock> where TMock : class
     {
-        SetupSettings _mockSetupSettings;
-        /// <summary>
-        /// Экземпляр двойника тестируемого типа
-        /// </summary>
-        ProxyMock<T> _proxyMock;
+        ProxyMock<TMock> _proxyMock;
 
-
-        /// <summary>
-        /// Экземпляр двойника тестируемого типа
-        /// </summary>
-        public T Object
+        public TMock Object
         {
             get
             {
-                return _proxyMock as T;
+                return _proxyMock as TMock;
             }
         }
 
-        /// <summary>
-        /// Коснтруктор
-        /// </summary>
         public Mock()
         {
-            _mockSetupSettings= new SetupSettings();
-            _proxyMock = TypeFactory.CreateProxy<T>();
-            _proxyMock.RegisterCallbackManager(new CallbackManager(_mockSetupSettings));
+            _proxyMock = TypeFactory.CreateProxy<TMock>();
         }
 
-
-        public ISetup<ProxyMock> Setup(Expression<Action<T>> expression)
+        public CallbackSetup<TMock> Setup(Expression<Action<TMock>> expression)
         {
-            var setupSetting = _mockSetupSettings.RegisterSetupAction<ProxyMock>(expression);
-            return setupSetting;
+            return new CallbackSetup<TMock>();
         }
-         
-        public ISetup<ProxyMock, TResult> Setup<TResult>(Expression<Func<T, TResult>> expression)
+
+        public ReturnsSetup<TMock, TReturnValue> Setup<TReturnValue>(Expression<Func<TMock, TReturnValue>> expression)
         {
-            var setupSetting = _mockSetupSettings.RegisterSetupFunction<ProxyMock, TResult>(expression);
-            return setupSetting;
+            return new ReturnsSetup<TMock, TReturnValue>();
         }
     }
 }
