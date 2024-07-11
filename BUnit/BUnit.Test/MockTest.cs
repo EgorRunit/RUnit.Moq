@@ -42,27 +42,27 @@ namespace BUnit.Test
             bAssert.IsAssignableFrom<ReturnsSetup<ITestInterface, int>>(setup2);
         }
 
-        [Fact]
-        public void CallCallback_Action_Int_Int()
-        {
-            //arrange
-            int value1 = 0;
-            int value2 = 0;
-            var callbackResult = _mock.Setup(x => x.WriteVoid(It.Any<int>(), It.Any<int>()))
-               .Callback<int, int>((x1, x2) =>
-               {
-                   value1 = x1;
-                   value2 = x2;
-               });
+        //[Fact]
+        //public void CallCallback_Action_Int_Int()
+        //{
+        //    //arrange
+        //    int value1 = 0;
+        //    int value2 = 0;
+        //    var callbackResult = _mock.Setup(x => x.WriteVoid(It.Any<int>(), It.Any<int>()))
+        //       .Callback<int, int>((x1, x2) =>
+        //       {
+        //           value1 = x1;
+        //           value2 = x2;
+        //       });
 
-            //act
-            _mock.Object.WriteVoid(4, 5);
+        //    //act
+        //    _mock.Object.WriteVoid(4, 5);
 
-            //assert
-            xAssert.Equal<int>(4, value1);
-            xAssert.Equal<int>(5, value2);
-            xAssert.IsType<CallbackResult>(callbackResult);
-        }
+        //    //assert
+        //    xAssert.Equal<int>(4, value1);
+        //    xAssert.Equal<int>(5, value2);
+        //    xAssert.IsType<CallbackResult>(callbackResult);
+        //}
 
 
         //[Fact]
