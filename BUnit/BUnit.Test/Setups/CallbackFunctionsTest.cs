@@ -146,6 +146,5 @@ namespace BUnit.Test.Setups
             bAssert.Equal(varValue1, argument1);
             bAssert.Equal(varValue2, argument2);
         }
-
     }
 }
